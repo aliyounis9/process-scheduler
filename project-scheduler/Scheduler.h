@@ -3,9 +3,14 @@
 #include "Processor.h"
 
 class Scheduler {
-	enum {MaxProcessorsCount = 500}; // maximum number of processors
+	enum { maxProcessorsCount = 500 }; // maximum number of processors
+	enum processorType {FCFS, SJF, RR};
 private:
-	int processorsCount;
-	Processor* processorsArray[MaxProcessorsCount];
-
+	int processorsCount, processessCount, timeSteps, NF, NS, NR, RTF, maxW, STL, forkProbability;
+	Processor* processorsArray[maxProcessorsCount];
+	LinkedQueue<Process> newList;
+	Scheduler() {
+		timeSteps= 0;
+		processorsCount = 0;
+	}
 };
