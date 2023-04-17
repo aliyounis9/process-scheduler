@@ -5,12 +5,13 @@ template <class T>
 class PriorityQueue : public QueueADT <T>
 {
 private:
-
+	int Count ; 
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
 	PriorityQueue()
 	{
+		Count=0;
 		backPtr = nullptr;
 		frontPtr = nullptr;
 	}
@@ -20,9 +21,11 @@ public:
 	}
 	bool dequeue(T& frntEntry)
 	{
+
 		if (isEmpty())
 			return false;
 
+		Count--;
 		Node<T>* nodeToDeletePtr = frontPtr;
 		frntEntry = frontPtr->getItem();
 		frontPtr = frontPtr->getNext();
@@ -57,15 +60,16 @@ public:
 		Node<T>* NodePtr = LQ.frontPtr;
 		if (!NodePtr) //LQ is empty
 		{
+			Count=0;
 			frontPtr = backPtr = nullptr;
 			return;
 		}
-
+		Count=LQ->getCount();
 		//insert the first node
 		Node<T>* ptr = new Node<T>(NodePtr->getItem());
 		frontPtr = backPtr = ptr;
 		NodePtr = NodePtr->getNext();
-
+	
 		//insert remaining nodes
 		while (NodePtr)
 		{
@@ -76,13 +80,14 @@ public:
 		}
 	}
 	bool enqueue(const T& newEntry)
-	{
+	{   
+		Count++;
 		Node<T>* newNodePtr = new Node<T>(newEntry);
 		// Insert the new node
 		if (isEmpty())	//special case if this is the first node to insert
 		{
 			frontPtr = newNodePtr; // The queue is empty
-			backPtr = newNodePtr;
+			backPtr  = newNodePtr;
 		}
 		else
 		{

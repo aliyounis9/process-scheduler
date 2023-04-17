@@ -3,13 +3,15 @@
 #include"process.h"
 class Processor{
 int QueueTimeLeft;
-Process *run;
+Process * run;
 QueueADT<Process*>*ReadyQ;
 bool busy;
+int RDYCount;
 public:
 	Processor(){
 	busy=false;
 	QueueTimeLeft=0;
+	RDYCount=0;
 	}
 	int virtual Run(Process* & done, int TS) = 0;
 	void virtual setBusy(bool b) = 0;
@@ -39,8 +41,10 @@ public:
 	void AddToQueue(Process*ToAdd){
 		QueueTimeLeft+=ToAdd->getCPUtime();
 		ReadyQ->enqueue(ToAdd);
+        
 	}
 	void virtual PrintReadyQ() = 0;
-	int virtual CountReadyQ() = 0;
-	virtual QueueADT<Process*>*  getReadyQ() = 0;
+	int virtual getRDYCount() =0 ; 
+	virtual QueueADT<Process*>*  getReadyQ() = 0; 
+
 };

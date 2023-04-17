@@ -16,7 +16,7 @@ template <typename T>
 class LinkedQueue:public QueueADT<T>
 {
 private:
-	
+	int Count ; 
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public :
@@ -26,39 +26,13 @@ public :
 	bool dequeue(T& frntEntry);  
 	bool peek(T& frntEntry)  const;	
 	bool top(T* &frntPointer)  const;
+	int getCount() const {return Count ; } 
+
 	~LinkedQueue();
 
 	//copy constructor
 	LinkedQueue(const LinkedQueue<T> & LQ);
-	friend int count(LinkedQueue<T>& zis)
-	{
-		if (zis.isEmpty())
-			return 0;
-		LinkedQueue <T> temp;
-		int count = 0;
-		T x;
-		zis.dequeue(x);
-		temp.enqueue(x);
-		count++;
-		
-		while (!zis.isEmpty())
-		{
-			T x;
-			zis.dequeue(x);
-			temp.enqueue(x);
-			count++;
-
-			
-		}
-		while (!temp.isEmpty())
-		{
-			T x;
-			temp.dequeue(x);
-			zis.enqueue(x);
-		}
-		return count;
-
-	}
+	
 	friend void print(LinkedQueue<T> & zis)
 	{
 		if (zis.isEmpty())
@@ -102,7 +76,7 @@ LinkedQueue<T>::LinkedQueue()
 {
 	backPtr=nullptr;
 	frontPtr=nullptr;
-
+	Count=0;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -131,6 +105,7 @@ Output: True if the operation is successful; otherwise false.
 template <typename T>
 bool LinkedQueue<T>::enqueue( const T& newEntry)
 {
+	Count++;
 	Node<T>* newNodePtr = new Node<T>(newEntry);
 	// Insert the new node
 	if (isEmpty())	//special case if this is the first node to insert
@@ -155,7 +130,8 @@ Output: True if the operation is successful; otherwise false.
 
 template <typename T>
 bool LinkedQueue<T>:: dequeue(T& frntEntry)  
-{
+{   
+	Count-- ;
 	if(isEmpty())
 		return false;
 
