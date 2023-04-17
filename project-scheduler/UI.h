@@ -25,7 +25,7 @@ public:
 	system("CLS");
 	}
 
-	void Print(Processor ** pro ,int NF ,int NS ,int NR , LinkedQueue<Process>*BLK ,LinkedQueue<Process>*RUN ,LinkedQueue<Process>*TRM) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
+	void Print(Processor ** pro ,int NF ,int NS ,int NR , LinkedQueue<Process>* BLK ,LinkedQueue<Process>*RUN ,LinkedQueue<Process>*TRM) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
 	{    
 		cout<<"Current Timestep:"<<TimeStep<<endl  ;
 		cout<<"----------- RDY processes ------------"<<endl ; 
@@ -50,7 +50,7 @@ public:
 		}
 
 		cout<<"----------- BLK processes ------------"<<endl ;
-	//	cout<<BLk->getCount()<<" BLK: "<<BLK->Print() ; 
+		cout<<BLK->getCount()<<" BLK: ";
 
 
 		cout<<"----------- RUN processes ------------"<<endl ;

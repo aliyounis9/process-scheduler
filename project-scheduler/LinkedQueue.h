@@ -16,7 +16,6 @@ template <typename T>
 class LinkedQueue:public QueueADT<T>
 {
 private:
-	int Count ; 
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public :
@@ -26,7 +25,7 @@ public :
 	bool dequeue(T& frntEntry);  
 	bool peek(T& frntEntry)  const;	
 	bool top(T* &frntPointer)  const;
-	int getCount() const {return Count ; } 
+	
 
 	~LinkedQueue();
 
@@ -76,7 +75,7 @@ LinkedQueue<T>::LinkedQueue()
 {
 	backPtr=nullptr;
 	frontPtr=nullptr;
-	Count=0;
+	setCount(0);
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
