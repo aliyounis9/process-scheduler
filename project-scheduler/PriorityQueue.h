@@ -5,13 +5,13 @@ template <class T>
 class PriorityQueue : public QueueADT <T>
 {
 private:
-	int Count ; 
+
 	Node<T>* backPtr;
 	Node<T>* frontPtr;
 public:
 	PriorityQueue()
 	{
-		Count=0;
+		setCount(0);
 		backPtr = nullptr;
 		frontPtr = nullptr;
 	}
@@ -25,7 +25,7 @@ public:
 		if (isEmpty())
 			return false;
 
-		Count--;
+		setCount(getCount()-1);
 		Node<T>* nodeToDeletePtr = frontPtr;
 		frntEntry = frontPtr->getItem();
 		frontPtr = frontPtr->getNext();
@@ -81,7 +81,7 @@ public:
 	}
 	bool enqueue(const T& newEntry)
 	{   
-		Count++;
+		setCount(getCount()+1);
 		Node<T>* newNodePtr = new Node<T>(newEntry);
 		// Insert the new node
 		if (isEmpty())	//special case if this is the first node to insert

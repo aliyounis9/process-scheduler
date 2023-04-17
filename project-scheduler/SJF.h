@@ -60,8 +60,27 @@ public:
         }
         cout<<"\n";
     }
+    int exist(){
+	int x=rand();
+	bool found=false;
+	LinkedQueue<Process*>TempQ;
+	for (int i = 0; i <ReadyQ->getCount(); i++)
+	{
+		Process*temp;
+		ReadyQ->dequeue(temp);
+		TempQ.enqueue(temp);
+		if (temp->getID()==x)
+		{
+			found=true;
+			break;
+		}
+	}
+	if(found)
+		return x;
+	else return 0;
+}
 		int getRDYCount(){
-			return ReadyQ->getCount() ; // need an edit at ADTQ class 
+			return ReadyQ->getCount() ;  
 		}
 		QueueADT<Process*>*  getReadyQ() {
 			return ReadyQ ; 
