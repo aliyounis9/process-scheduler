@@ -6,6 +6,6 @@ class Scheduler {
 	enum {MaxProcessorsCount = 500}; // maximum number of processors
 private:
 	int processorsCount;
-	Processors* processorsArray[MaxProcessorsCount];
+	Processor* processorsArray[MaxProcessorsCount];
 
 };

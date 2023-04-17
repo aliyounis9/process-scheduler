@@ -139,7 +139,7 @@
   <ItemGroup>
     <ClCompile Include="IO.cpp" />
     <ClCompile Include="LinkedQueue.cpp" />
-    <ClCompile Include="mian.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Processor.cpp" />
