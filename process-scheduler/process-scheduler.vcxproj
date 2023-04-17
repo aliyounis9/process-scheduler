@@ -135,6 +135,14 @@
     <ClInclude Include="C:\Users\alita\Desktop\Proooject\Processor.h" />
     <ClInclude Include="C:\Users\alita\Desktop\Proooject\QueueADT.h" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="C:\Users\alita\Desktop\Proooject\IO.cpp" />
+    <ClCompile Include="C:\Users\alita\Desktop\Proooject\LinkedQueue.cpp" />
+    <ClCompile Include="C:\Users\alita\Desktop\Proooject\PriorityQueue.cpp" />
+    <ClCompile Include="C:\Users\alita\Desktop\Proooject\Process.cpp" />
+    <ClCompile Include="C:\Users\alita\Desktop\Proooject\Processor.cpp" />
+    <ClCompile Include="C:\Users\alita\Desktop\Proooject\QueueADT.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
