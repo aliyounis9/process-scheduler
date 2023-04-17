@@ -8,7 +8,7 @@ class SJF :	public Processor
 
 public:
 	SJF(){
-		ReadyQ=new PriorityQueue<Process *> ;
+		ReadyQ = new PriorityQueue<Process *> ;
 		run = 0 ; 
 	}
 	int Run(){
