@@ -3,8 +3,8 @@
 #include "IO.h"
 #include<iostream>
 using namespace std;
-class Process
-{
+class Process{
+private:
 	int ID;
 	int AT;
 	int RT;
@@ -18,33 +18,34 @@ class Process
 	LinkedQueue <IO> IOs;
 	IO* nextIO;
 public:
-Process(int at=0, int id=0, int ct=0, int IOn=0) {
+
+Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
 		AT=at;
 		ID=id;
 		CT=ct;
-	IO_n=IOn;
-	timeLeft=ct;
+		IO_n=IOn;
+		timeLeft=ct;
 		TimeDone = 0;
 		nextIO = nullptr;
 	}
 
 void setID(int x){
-ID=x;
+	ID=x;
 }
 void setArrivalTime(int x){
-AT=x;
+	AT=x;
 }
 void setResponseTime(int x){
-RT=x;
+	RT=x;
 }
 void setCPUtime(int x){
-CT=x;
+	CT=x;
 }
 void setTimeDone(int x){
 	TimeDone=x;
 }
 void setTerminateTime(int x){
-TT=x;
+	TT=x;	
 }
 void setTurnAroundTime(int x){
 	TurnAroundTime=x;
@@ -53,7 +54,7 @@ void setWaitingTime(int x){
 	WaitingTime=x;
 }
 void setIONumber(int x){
-IO_n=x;
+	IO_n=x;
 }
 void setTimeLeft(int x){
 	timeLeft=x;
@@ -62,22 +63,22 @@ void SetNextIO(IO* io){
 	nextIO=io;
 }
 int getID(){
-return ID;
+	return ID;
 }
 int getArrivalTime(){
-return AT;
+	return AT;
 }
 int getResponseTime(){
-return RT;
+	return RT;
 }
 int getCPUtime(){
-return CT;
+	return CT;
 }
 int getTimeDone(){
 	return TimeDone;
 }
 int getTerminationTime(){
-return TT;
+	return TT;
 }
 int getTurnAroundTime(){
 	return TurnAroundTime;
@@ -100,8 +101,7 @@ bool operator >(Process x){
 void AddIO(IO &io){
 	IOs.enqueue(io);
 }
-void popIO()
-	{
+void popIO(){
 		IO ret;
 		if (IOs.isEmpty())
 			return;
@@ -116,13 +116,10 @@ void popIO()
 		return;
 }
 void Print() {
-		cout << "Arival: " << AT << ", PID: " << ID << ", CPU Time: " << CT << ", IOs: " << IO_n<<endl;
+		cout << "Arrival: " << AT << ", PID: " << ID << ", CPU Time: " << CT << ", IOs: " << IO_n<<endl;
 	}
-	friend ostream& operator << (ostream& out, Process* ptr)
-	{
-		
+	friend ostream& operator << (ostream& out, Process* ptr){
 		out << ptr->ID;
 		return out;
-		
 	}
 };
