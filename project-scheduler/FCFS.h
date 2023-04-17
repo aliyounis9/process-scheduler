@@ -61,6 +61,10 @@ public:
 		return x;
 	else return 0;
 }
+
+	int getRDYCount(){
+			return ReadyQ->getCount() ;  
+	}
 	bool isBusy(){
 	   return busy;
 	}

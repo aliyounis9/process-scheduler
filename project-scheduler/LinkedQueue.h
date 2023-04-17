@@ -105,7 +105,7 @@ Output: True if the operation is successful; otherwise false.
 template <typename T>
 bool LinkedQueue<T>::enqueue( const T& newEntry)
 {
-	Count++;
+	setCount(getCount()+1);
 	Node<T>* newNodePtr = new Node<T>(newEntry);
 	// Insert the new node
 	if (isEmpty())	//special case if this is the first node to insert
@@ -124,17 +124,16 @@ bool LinkedQueue<T>::enqueue( const T& newEntry)
 Removes the front of this queue. That is, removes the item that was added
 earliest.
 
-Input: None.
+Input: NonesetCount(getCount()+1);
 Output: True if the operation is successful; otherwise false.
 */
 
 template <typename T>
 bool LinkedQueue<T>:: dequeue(T& frntEntry)  
 {   
-	Count-- ;
 	if(isEmpty())
 		return false;
-
+	setCount(getCount()-1);
 	Node<T>* nodeToDeletePtr = frontPtr;
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();
@@ -198,7 +197,7 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T> & LQ)
 		frontPtr = backPtr = nullptr;
 		return;
 	}
-
+	setCount(LQ.getCount()) ; 
 	//insert the first node
 	Node<T>* ptr = new Node<T>(NodePtr->getItem());
 	frontPtr = backPtr = ptr;
