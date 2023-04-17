@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -135,6 +135,7 @@
     <ClInclude Include="Processor.h" />
     <ClInclude Include="QueueADT.h" />
     <ClInclude Include="Scheduler.h" />
+    <ClInclude Include="SJF.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Processor.cpp" />
     <ClCompile Include="QueueADT.cpp" />
+    <ClCompile Include="SJF.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
