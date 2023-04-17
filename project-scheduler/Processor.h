@@ -1,6 +1,7 @@
 #pragma once
 #include"QueueADT.h"
-#include"process.h"
+#include"Process.h"
+
 class Processor{
 int QueueTimeLeft;
 Process * run;
@@ -9,34 +10,39 @@ bool busy;
 int RDYCount;
 public:
 	Processor(){
+<<<<<<< HEAD
 	busy=false;
 	QueueTimeLeft=0;
 	RDYCount=0;
+=======
+		busy=false;
+		QueueTimeLeft=0;
+>>>>>>> 99a142e9e46eb9e19c752f60dfe34fee7304ab98
 	}
 	int virtual Run(Process* & done, int TS) = 0;
 	void virtual setBusy(bool b) = 0;
 	bool virtual isBusy() = 0;
 	void virtual setTimeLeftInQueue(int t) = 0;
 	int virtual GetTimeLeft(){
-	int time=0;
-	if(run)time+=run->getTimeLeft();// Adds the time left for the running process to the total time 
-	LinkedQueue<Process*>TempQ;
-	if(ReadyQ->isEmpty())return time;// If ready Queue is empty the time left for processor is the time left for the running process
-	while(!ReadyQ->isEmpty()){
-		Process*temp;
-		ReadyQ->dequeue(temp);
-		time+=temp->getTimeLeft();
-		TempQ.enqueue(temp);// Enquing Processes into temp Queue then Enquing them again into the Ready Queue
-	}
-	while(!TempQ.isEmpty()){
-		Process *x;
-		TempQ.dequeue(x);
-		ReadyQ->enqueue(x);
-	}
+		int time=0;
+		if(run)time+=run->getTimeLeft();// Adds the time left for the running process to the total time 
+		LinkedQueue<Process*>TempQ;
+		if(ReadyQ->isEmpty())return time;// If ready Queue is empty the time left for processor is the time left for the running process
+		while(!ReadyQ->isEmpty()){
+			Process*temp;
+			ReadyQ->dequeue(temp);
+			time+=temp->getTimeLeft();
+			TempQ.enqueue(temp);// Enquing Processes into temp Queue then Enquing them again into the Ready Queue
+		}
+		while(!TempQ.isEmpty()){
+			Process *x;
+			TempQ.dequeue(x);
+			ReadyQ->enqueue(x);
+		}
 	return time;
 	}
 	Process* getrun(){
-	return run;
+		return run;
 	}
 	void AddToQueue(Process*ToAdd){
 		QueueTimeLeft+=ToAdd->getCPUtime();
