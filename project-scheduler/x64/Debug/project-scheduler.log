@@ -1,8 +1,2 @@
-﻿  mian.cpp
-  Process.cpp
-D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Process.cpp(4,10): error C2511: 'Process::Process(void)': overloaded member function not found in 'Process'
-D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Process.h(6,7): message : see declaration of 'Process'
-D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Process.cpp(9,11): error C2600: 'Process::~Process': cannot define a compiler-generated special member function (must be declared in the class first)
-  Processor.cpp
-  QueueADT.cpp
-  Generating Code...
+﻿  Process.cpp
+  project-scheduler.vcxproj -> D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\x64\Debug\project-scheduler.exe
