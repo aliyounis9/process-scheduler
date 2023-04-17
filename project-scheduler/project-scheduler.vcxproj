@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FCFS.h" />
     <ClInclude Include="IO.h" />
     <ClInclude Include="LinkedQueue.h" />
     <ClInclude Include="Node.h" />
@@ -138,6 +139,7 @@
     <ClInclude Include="SJF.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FCFS.cpp" />
     <ClCompile Include="IO.cpp" />
     <ClCompile Include="LinkedQueue.cpp" />
     <ClCompile Include="main.cpp" />
