@@ -1,6 +1,7 @@
 #pragma once
 #include"QueueADT.h"
 #include"process.h"
+
 class Processor{
 int QueueTimeLeft;
 Process *run;
@@ -8,8 +9,8 @@ QueueADT<Process*>*ReadyQ;
 bool busy;
 public:
 	Processor(){
-	busy=false;
-	QueueTimeLeft=0;
+		busy=false;
+		QueueTimeLeft=0;
 	}
 	int virtual Run(Process* & done, int TS) = 0;
 	void virtual setBusy(bool b) = 0;
