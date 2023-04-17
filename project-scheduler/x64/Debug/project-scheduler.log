@@ -1,8 +1,9 @@
-﻿Build started 4/17/2023 11:11:13 PM.
-     1>Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" on node 2 (Build target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V110\Microsoft.Cpp.Platform.targets(44,5): error MSB8020: The builds tools for v143 (Platform Toolset = 'v143') cannot be found. To build using the v143 build tools, either click the Project menu or right-click the solution, and then select "Update VC++ Projects...". Install v143 to build using the v143 build tools.
-     1>Done Building Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" (Build target(s)) -- FAILED.
-
-Build FAILED.
-
-Time Elapsed 00:00:00.08
+﻿  FCFS.cpp
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\FCFS.h(49,29): error C2039: 'getCount': is not a member of 'QueueADT<Process *>'
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Processor.h(9,1): message : see declaration of 'QueueADT<Process *>'
+  main.cpp
+  SJF.cpp
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\SJF.h(18,14): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\SJF.h(64,19): error C2039: 'getCount': is not a member of 'QueueADT<Process *>'
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Processor.h(9,1): message : see declaration of 'QueueADT<Process *>'
+  Generating Code...

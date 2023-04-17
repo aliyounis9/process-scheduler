@@ -7,10 +7,11 @@ class Scheduler {
 	enum processorType {FCFS, SJF, RR};
 private:
 	int processorsCount, processessCount, timeSteps, NF, NS, NR, RTF, maxW, STL, forkProbability;
+	ifstream inputFile;
 	Processor* processorsArray[maxProcessorsCount];
 	LinkedQueue<Process> newList;
-	Scheduler() {
+	Scheduler(const char* filename):inputFile(filename) {
 		timeSteps= 0;
 		processorsCount = 0;
 	}
-};
+};                                                                    
