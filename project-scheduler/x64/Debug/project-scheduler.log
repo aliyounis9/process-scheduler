@@ -1,5 +1,7 @@
-﻿  IO.cpp
-  LinkedQueue.cpp
+﻿  mian.cpp
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Scheduler.h(9,12): error C2143: syntax error: missing ';' before '*'
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Scheduler.h(9,12): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Scheduler.h(9,49): error C2238: unexpected token(s) preceding ';'
   PriorityQueue.cpp
   Process.cpp
 D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\project-scheduler\Process.cpp(4,10): error C2511: 'Process::Process(void)': overloaded member function not found in 'Process'

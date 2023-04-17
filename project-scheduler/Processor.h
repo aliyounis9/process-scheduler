@@ -1,6 +1,6 @@
 #pragma once
 #include"QueueADT.h"
-#include"process.h"
+#include"Process.h"
 
 class Processor{
 int QueueTimeLeft;

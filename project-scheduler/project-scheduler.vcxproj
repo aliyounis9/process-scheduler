@@ -134,10 +134,12 @@
     <ClInclude Include="Process.h" />
     <ClInclude Include="Processor.h" />
     <ClInclude Include="QueueADT.h" />
+    <ClInclude Include="Scheduler.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="IO.cpp" />
     <ClCompile Include="LinkedQueue.cpp" />
+    <ClCompile Include="mian.cpp" />
     <ClCompile Include="PriorityQueue.cpp" />
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Processor.cpp" />
