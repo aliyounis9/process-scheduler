@@ -3,6 +3,7 @@
 
 int main() {
 
+	cout << "Program ran successfuly";
 	return 0;
 }
 

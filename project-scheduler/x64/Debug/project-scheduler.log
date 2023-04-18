@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 ﻿Build started 4/18/2023 2:46:38 AM.
+=======
+<<<<<<< HEAD
+﻿  main.cpp
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(16): fatal error C1073: Internal error involving incremental compilation(compiler file 'f:\dd\vctools\compiler\cxxfe\sl\p1\c\funcs.c', line 4418)
+=======
+﻿Build started 4/18/2023 1:52:50 AM.
+>>>>>>> c22a86f2abd6c38813f7fcb9082d1fecbbd7ffc8
      1>Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc110.pdb" /Gd /TP /errorReport:prompt UI.cpp
@@ -19,4 +27,9 @@
 
 Build succeeded.
 
+<<<<<<< HEAD
 Time Elapsed 00:00:01.30
+=======
+Time Elapsed 00:00:03.29
+>>>>>>> 4f75b9b9f63014e931000781db6148b7b5adbab5
+>>>>>>> c22a86f2abd6c38813f7fcb9082d1fecbbd7ffc8
