@@ -148,6 +148,7 @@
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Processor.cpp" />
     <ClCompile Include="QueueADT.cpp" />
+    <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="SJF.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
