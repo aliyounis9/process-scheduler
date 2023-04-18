@@ -11,12 +11,12 @@ public:
 		run=NULL;
 		ReadyQ=new LinkedQueue<Process*>;
 	}
-	int virtual Run(Process*&run,int T){
+	virtual int Run(){
 		if(!busy&&!ReadyQ->isEmpty()){ // Checks if there is not processes running and the ready queue isnt empty it dequeues a new process and start processing it
 			ReadyQ->dequeue(run);
 			busy = true;
-			run->setResponseTime(T);
-			run->setWaitingTime(T-run->getArrivalTime());
+			//run->setResponseTime(T);                                      <---  we need to check them 
+			//run->setWaitingTime(T-run->getArrivalTime());
 		}
 		if(run){ // if there is a process already executing
 		  int prob = rand()%100 +1;
@@ -68,10 +68,10 @@ public:
 	bool isBusy(){
 	   return busy;
 	}
-	QueueADT<Process*>*getReadyQ(){
+	virtual QueueADT<Process*>*getReadyQ(){
 		return ReadyQ;
 	}
-	void PrintReady(){
+	virtual void PrintReadyQ() {
         if(ReadyQ->isEmpty())
     return;
         LinkedQueue<Process*>TempQ;

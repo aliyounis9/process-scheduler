@@ -11,7 +11,7 @@ public:
 		ReadyQ = new PriorityQueue<Process *> ;
 		run = 0 ; 
 	}
-	int Run(){
+	virtual int  Run(){
 		if(!busy && !ReadyQ->isEmpty()){
 			busy=1;
 			ReadyQ->dequeue(run);	
@@ -39,27 +39,26 @@ public:
 	bool isBusy(){
 		return busy ; 
 	}
-		void PrintReady(){
-        if(ReadyQ->isEmpty())
-    return;
-        LinkedQueue<Process*>TempQ;
-            Process* temp;
-            ReadyQ->dequeue(temp);
-            TempQ.enqueue(temp);
-            cout<<temp;
-        while(!ReadyQ->isEmpty()){
-            Process* temp;
-            ReadyQ->dequeue(temp);
-            TempQ.enqueue(temp);
-            cout<<", "<<temp;
-        }
-        while(!TempQ.isEmpty()){
-            Process* temp;
-            TempQ.dequeue(temp);
-            ReadyQ->enqueue(temp);
-        }
-        cout<<"\n";
-    }
+	virtual void PrintReadyQ(){
+		if(ReadyQ->isEmpty()) return;
+		LinkedQueue<Process*>TempQ;
+		Process* temp;
+		ReadyQ->dequeue(temp);
+		TempQ.enqueue(temp);
+		cout<<temp;
+		while(!ReadyQ->isEmpty()){
+		Process* temp;
+		ReadyQ->dequeue(temp);
+		TempQ.enqueue(temp);
+		cout<<", "<<temp;
+		}
+		while(!TempQ.isEmpty()){
+		Process* temp;
+		TempQ.dequeue(temp);
+		ReadyQ->enqueue(temp);
+		}
+		cout<<"\n";
+	}
     int exist(){
 	int x=rand();
 	bool found=false;

@@ -17,7 +17,7 @@ public:
    virtual bool dequeue(ItemType& FrontEntry) = 0;
    virtual bool peek(ItemType& FrontEntry) const = 0;
    void setCount(int x) {
-	   Count =x ; 
+	   Count = x ; 
    }
    int getCount () const{return Count;}
    virtual ~QueueADT() { }
