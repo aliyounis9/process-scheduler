@@ -1,15 +1,25 @@
-﻿  Scheduler.cpp
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating Code...
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\sjf.h(38): warning C4715: 'SJF::Run' : not all control paths return a value
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\fcfs.h(44): warning C4715: 'FCFS::Run' : not all control paths return a value
-  Compiling...
-  main.cpp
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-  UI.cpp
-  SJF.cpp
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-  Processor.cpp
-  FCFS.cpp
-  Generating Code...
-  project-scheduler.vcxproj -> D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\pc-\process-scheduler\x64\Debug\project-scheduler.exe
+﻿Build started 4/18/2023 9:35:08 PM.
+     1>Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc110.pdb" /Gd /TP /errorReport:prompt FCFS.cpp IO.cpp LinkedQueue.cpp main.cpp PriorityQueue.cpp Process.cpp Processor.cpp QueueADT.cpp Scheduler.cpp SJF.cpp UI.cpp
+         UI.cpp
+         SJF.cpp
+     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         Scheduler.cpp
+     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>Scheduler.cpp(66): error C2660: 'Processor::Run' : function does not take 0 arguments
+         QueueADT.cpp
+         Processor.cpp
+         Process.cpp
+         PriorityQueue.cpp
+         main.cpp
+     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         LinkedQueue.cpp
+         IO.cpp
+         FCFS.cpp
+         Generating Code...
+     1>Done Building Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:04.03

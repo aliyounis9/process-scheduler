@@ -15,7 +15,7 @@ public:
 		QueueTimeLeft=0;
 		RDYCount=0;
 	}
-	virtual int Run() = 0 ;
+	virtual int Run(Process * & ptr,int TS) = 0 ;
 	virtual bool  isBusy() {
 		return busy;
 	}
