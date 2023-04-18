@@ -10,7 +10,7 @@ class Scheduler {
 private:
 	int processorsCount, processessCount, timeSteps, NF, NS, NR, RR_timeSlice, RTF, maxW, STL, forkProbability;
 	Processor* processorsArray[maxProcessorsCount];
-	LinkedQueue<Process> newList;
+	LinkedQueue<Process> newList, trmList;
 	LinkedQueue<pair<int, int>> sigKillTimes;
 	ifstream inputFile;
 public:

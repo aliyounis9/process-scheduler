@@ -36,9 +36,6 @@ public:
 			return 0 ; 
 		}
 	}
-	bool isBusy(){
-		return busy ; 
-	}
 	virtual void PrintReadyQ(){
 		if(ReadyQ->isEmpty()) return;
 		LinkedQueue<Process*>TempQ;

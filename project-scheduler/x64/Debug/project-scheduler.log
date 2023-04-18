@@ -1,5 +1,15 @@
 ﻿  Scheduler.cpp
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\fcfs.h(44): warning C4715: 'FCFS::Run' : not all control paths return a value
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\sjf.h(38): warning C4715: 'SJF::Run' : not all control paths return a value
-  project-scheduler.vcxproj -> D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\process-scheduler\x64\Debug\project-scheduler.exe
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+  Generating Code...
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\sjf.h(38): warning C4715: 'SJF::Run' : not all control paths return a value
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\fcfs.h(44): warning C4715: 'FCFS::Run' : not all control paths return a value
+  Compiling...
+  main.cpp
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+  UI.cpp
+  SJF.cpp
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+  Processor.cpp
+  FCFS.cpp
+  Generating Code...
+  project-scheduler.vcxproj -> D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\pc-\process-scheduler\x64\Debug\project-scheduler.exe

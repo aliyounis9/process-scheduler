@@ -16,12 +16,14 @@ public:
 		RDYCount=0;
 	}
 	virtual int Run() = 0 ;
-	virtual bool  isBusy() = 0;
+	virtual bool  isBusy() {
+		return busy;
+	}
 	
 	virtual int  GetTimeLeft(){
 		return QueueTimeLeft;
 	}
-	Process* getrun(){
+	Process* getRunning(){
 		return run;
 	}
 	void AddToQueue(Process*ToAdd){

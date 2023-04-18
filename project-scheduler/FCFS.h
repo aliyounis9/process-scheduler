@@ -17,6 +17,7 @@ public:
 			busy = true;
 			//run->setResponseTime(T);                                      <---  we need to check them 
 			//run->setWaitingTime(T-run->getArrivalTime());
+			return -1;
 		}
 		if(run){ // if there is a process already executing
 		  int prob = rand()%100 +1;
@@ -64,9 +65,6 @@ public:
 
 	int getRDYCount(){
 			return ReadyQ->getCount() ;  
-	}
-	bool isBusy(){
-	   return busy;
 	}
 	virtual QueueADT<Process*>*getReadyQ(){
 		return ReadyQ;
