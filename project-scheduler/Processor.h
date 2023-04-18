@@ -15,10 +15,10 @@ public:
 		QueueTimeLeft=0;
 		RDYCount=0;
 	}
-	int virtual Run() = 0 ;
-	bool virtual isBusy() = 0;
+	virtual int Run() = 0 ;
+	virtual bool  isBusy() = 0;
 	
-	int virtual GetTimeLeft(){
+	virtual int  GetTimeLeft(){
 		return QueueTimeLeft;
 	}
 	Process* getrun(){
@@ -29,8 +29,8 @@ public:
 		ReadyQ->enqueue(ToAdd);
         
 	}
-	void virtual PrintReadyQ() = 0;
-	int virtual getRDYCount() =0 ; 
+	virtual void  PrintReadyQ() = 0;
+	virtual int  getRDYCount() =0 ;
 	virtual QueueADT<Process*>*  getReadyQ() = 0; 
 
 };

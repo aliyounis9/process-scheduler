@@ -1,33 +1,18 @@
-<<<<<<< HEAD
 ﻿  main.cpp
 d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(26): error C2061: syntax error : identifier 'FCFS'
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(27): error C2061: syntax error : identifier 'SJF'
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(28): error C2061: syntax error : identifier 'SJF'
-=======
-﻿Build started 4/18/2023 2:49:14 AM.
-     1>Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc110.pdb" /Gd /TP /errorReport:prompt main.cpp UI.cpp
-         main.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         UI.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.lib" /MACHINE:X64 x64\Debug\FCFS.obj
-         x64\Debug\IO.obj
-         x64\Debug\LinkedQueue.obj
-         x64\Debug\main.obj
-         x64\Debug\PriorityQueue.obj
-         x64\Debug\Process.obj
-         x64\Debug\Processor.obj
-         x64\Debug\QueueADT.obj
-         x64\Debug\SJF.obj
-         x64\Debug\UI.obj
-         project-scheduler.vcxproj -> C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.exe
-     1>Done Building Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:01.11
->>>>>>> 9b003c5a038c3499873d344b9ecc6ad305b4502f
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(26): error C2259: 'FCFS' : cannot instantiate abstract class
+          due to following members:
+          'int Processor::Run(void)' : is abstract
+          d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Processor.h(18) : see declaration of 'Processor::Run'
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(27): error C2259: 'SJF' : cannot instantiate abstract class
+          due to following members:
+          'void Processor::PrintReadyQ(void)' : is abstract
+          d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Processor.h(32) : see declaration of 'Processor::PrintReadyQ'
+d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Scheduler.h(28): error C2259: 'SJF' : cannot instantiate abstract class
+          due to following members:
+          'void Processor::PrintReadyQ(void)' : is abstract
+          d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\process-scheduler\project-scheduler\Processor.h(32) : see declaration of 'Processor::PrintReadyQ'
+  Generating Code...
+  Compiling...
+  FCFS.cpp
+  Generating Code...

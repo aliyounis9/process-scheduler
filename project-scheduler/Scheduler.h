@@ -6,7 +6,7 @@
 
 class Scheduler {
 	enum { maxProcessorsCount = 500 }; // maximum number of processors
-	enum processorType {FCFS, SJF, RR};
+	enum processorType {FCFS_processor, SJF_processor, RR_processor};
 private:
 	int processorsCount, processessCount, timeSteps, NF, NS, NR, RR_timeSlice, RTF, maxW, STL, forkProbability;
 	Processor* processorsArray[maxProcessorsCount];
