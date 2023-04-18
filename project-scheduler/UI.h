@@ -24,8 +24,8 @@ public:
 	cin.ignore(1000000000, '\n'); 
 	system("CLS");
 	}
-
-	void Print(Processor ** pro ,int NF ,int NS ,int NR , LinkedQueue<Process>* BLK ,LinkedQueue<Process>*RUN ,LinkedQueue<Process>*TRM) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
+	template<class T>
+	void Print(Processor ** pro ,int count ,int NF ,int NS ,int NR , LinkedQueue<Process>* BLK ,LinkedQueue<Process>*RUN ,LinkedQueue<Process>*TRM) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
 	{    
 		cout<<"Current Timestep:"<<TimeStep<<endl  ;
 		cout<<"----------- RDY processes ------------"<<endl ; 
@@ -36,13 +36,13 @@ public:
 			pro[i]->PrintReadyQ(); 
 
 		}
-		for(int i = 0  ;i< NS ; i++ ) 
+		for(int i = NF ;i< NS ; i++ ) 
 		{
 			cout<<"processor "<<i+1<<" "<<"[SJF ]: "<<pro[i]->getRDYCount()<<" RDY: ";
 			pro[i]->PrintReadyQ(); 
 
 		}
-		for(int i = 0  ;i< NR ; i++ ) 
+		for(int i = NS  ;i< NR ; i++ ) 
 		{
 			cout<<"processor "<<i+1<<" "<<"[RR  ]: "<<pro[i]->getRDYCount()<<" RDY: ";
 			pro[i]->PrintReadyQ(); 
@@ -50,15 +50,71 @@ public:
 		}
 
 		cout<<"----------- BLK processes ------------"<<endl ;
-		cout<<BLK->getCount()<<" BLK: ";
-
-
+		cout<<BLK->getCount()<<" BLK:";
+		if(!BLK->isEmpty())
+		{
+			LinkedQueue<T>*TempQ ; 
+			while(!BLK->isEmpty()){
+			Process * id ;
+			BLK->dequeue(id);
+			TempQ->enqueue(id);
+			cout<<id->getID();
+			if(!BLK->isEmpty())
+				cout<<", ";
+			}
+			while(!TempQ->isEmpty())
+			{
+				Process * t ; 
+				TempQ->dequeue(t);
+				BLK->enqueue(t);
+			}
+		}else 
+			cout<<endl;
+		int c = 0 ; 
 		cout<<"----------- RUN processes ------------"<<endl ;
-		// here we should add count that count number of ready processes and then iterate on the processors to print them  " 
-
-
+		for (int i = 0; i < count; i++)
+		{
+			if(pro[i]->isBusy())
+				c++;
+		}
+		cout<<c<<" RUN:";
+		int x = 0 ;
+		for (int i = 0; i < count; i++)
+		{
+			if(pro[i]->isBusy())
+			{
+				x++;
+				cout<<" "<<pro[i]->getrun()->getID()<<"P"<<i+1;
+				if(x!=c)
+				{
+					cout<<","
+				}
+			}
+		}
+		cout<<endl;
 		cout<<"----------- TRM processes ------------"<<endl ;
-	//	cout<<TRM->getCount()<<" TRM: "<<TRM->Print() ; 
+
+	    cout<<TRM->getCount()<<" TRM:";
+		if(!TRM->isEmpty())
+		{
+			LinkedQueue<T>*TempQ ; 
+			while(!TRM->isEmpty()){
+			Process * id ;
+			TRM->dequeue(id);
+			TempQ->enqueue(id);
+			cout<<id->getID();
+			if(!TRM->isEmpty())
+				cout<<", ";
+			}
+			while(!TempQ->isEmpty())
+			{
+				Process * t ; 
+				TempQ->dequeue(t);
+				TRM->enqueue(t);
+			}
+		}else 
+			cout<<endl;
+        
 
 
 		
