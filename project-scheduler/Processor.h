@@ -11,9 +11,9 @@ bool busy;
 int RDYCount;
 public:
 	Processor(){
-	busy=false;
-	QueueTimeLeft=0;
-	RDYCount=0;
+		busy=false;
+		QueueTimeLeft=0;
+		RDYCount=0;
 	}
 	int virtual Run() = 0 ;
 	bool virtual isBusy() = 0;
