@@ -85,7 +85,7 @@ public:
 			if(pro[i]->isBusy())
 			{
 				x++;
-				cout<<" "<<pro[i]->getrun()->getID()<<"P"<<i+1;
+				cout<<" "<<pro[i]->getrun()->getID()<<"(P"<<i+1<<")";
 				if(x!=c)
 				{
 					cout<<",";
