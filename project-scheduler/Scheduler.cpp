@@ -113,5 +113,5 @@ void Scheduler::simulator() {
 
 
 	}
-
+	cout << timeSteps << endl;
 }
