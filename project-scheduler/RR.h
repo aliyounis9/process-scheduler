@@ -18,7 +18,7 @@ public:
 	int GetTimeSlice(){
 		return TimeSlice;
 	}
-	virtual bool setrun(int TS){
+	virtual bool setRun(int TS){
 		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
 			busy = true;
@@ -66,7 +66,7 @@ public:
 					{
 						busy=false;
 		             	Process*Temp=run;
-		             	ReadyQ->enqueue(Temp);
+		             	ptr=run;
 			            run=NULL;
 						return 1 ; 
 					}else

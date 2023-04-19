@@ -5,14 +5,15 @@ void  Scheduler::loadInputFile() {
 		inputFile >> NF >> NS >> NR;
 		processorsCount = NF + NS + NR;
 
+
+		inputFile >> RR_timeSlice >> RTF >> maxW >> STL >> forkProbability >> processessCount;
+
 		// create processors of each type: they are categorized according to their indices
 		for (int i = 0; i < processorsCount; i++) {
 			if (i < NF) processorsArray[i] = new FCFS;
-			else if (i < NS) processorsArray[i] = new SJF;
-			else processorsArray[i] = new SJF;
+			else if (i < NS+NF) processorsArray[i] = new SJF;
+			else processorsArray[i] = new RR(RR_timeSlice) ;
 		}
-
-		inputFile >> RR_timeSlice >> RTF >> maxW >> STL >> forkProbability >> processessCount;
 
 		// read data of each individual process then creating it
 		for (int i = 0; i < processessCount; i++) {
@@ -73,7 +74,8 @@ void Scheduler::simulator() {
 		for (int i = 0; i < processorsCount; i++){
 			Process* currentRunningProcess = nullptr;
 			int prob = processorsArray[i]->Run(currentRunningProcess);
-			if (prob == 1) blkList.enqueue(currentRunningProcess);
+			if (prob == 1)
+				blkList.enqueue(currentRunningProcess);
 			else if (prob == 2) {
  				processorsArray[currentProcessor]->AddToQueue(currentRunningProcess);
 				currentProcessor = (currentProcessor + 1) % processorsCount;
@@ -85,10 +87,11 @@ void Scheduler::simulator() {
 		}
 
 		// generate a random number (1-100) and if this number is < 10, move the process from the BLK to RDY
-		int randomNumber = (rand() % 100) + 1;
+		int randomNumber = 5 ;//(rand() % 100) + 1;
 		if (randomNumber < 10) {
-			Process* processInBlk;
-			if (blkList.dequeue(processInBlk)) {
+			Process* processInBlk = 0;
+			if (!blkList.isEmpty()) {
+				blkList.dequeue(processInBlk);
 				processorsArray[currentProcessor]->AddToQueue(processInBlk);
 				currentProcessor = (currentProcessor + 1) % processorsCount;
 			}
