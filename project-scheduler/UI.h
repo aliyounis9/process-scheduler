@@ -62,6 +62,7 @@ public:
 			if(!BLK->isEmpty())
 				cout<<", ";
 			}
+			cout<<endl ;
 			while(!TempQ->isEmpty())
 			{
 				Process  t ; 
@@ -106,6 +107,7 @@ public:
 			if(!TRM->isEmpty())
 				cout<<", ";
 			}
+			cout<<endl ; 
 			while(!TempQ->isEmpty())
 			{
 				Process t ; 

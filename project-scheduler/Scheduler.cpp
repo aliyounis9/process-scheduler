@@ -105,6 +105,7 @@ void Scheduler::simulator() {
 		}
 
 		ui.setTimeStep(timeSteps);
+<<<<<<< HEAD
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
 		Process a7a;
@@ -118,6 +119,10 @@ void Scheduler::simulator() {
 				cout << a7a.getID() << "t" << endl;
 			}
 		}
+=======
+		ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
+		ui.continueprinting();
+>>>>>>> 8e5a9ddc5a4a1f627276132a49d852315a4a2e94
 
 	}
 
