@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <time.h>
 #include"UI.h"
+#include"RR.h"
 
 class Scheduler {
 	enum { maxProcessorsCount = 500 }; // maximum number of processors

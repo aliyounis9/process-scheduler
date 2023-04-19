@@ -5,14 +5,15 @@ void  Scheduler::loadInputFile() {
 		inputFile >> NF >> NS >> NR;
 		processorsCount = NF + NS + NR;
 
+
+		inputFile >> RR_timeSlice >> RTF >> maxW >> STL >> forkProbability >> processessCount;
+
 		// create processors of each type: they are categorized according to their indices
 		for (int i = 0; i < processorsCount; i++) {
 			if (i < NF) processorsArray[i] = new FCFS;
 			else if (i < NS) processorsArray[i] = new SJF;
 			else processorsArray[i] = new SJF;
 		}
-
-		inputFile >> RR_timeSlice >> RTF >> maxW >> STL >> forkProbability >> processessCount;
 
 		// read data of each individual process then creating it
 		for (int i = 0; i < processessCount; i++) {
@@ -108,7 +109,7 @@ void Scheduler::simulator() {
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
 
-		ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
+		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList);
 		ui.continueprinting();
 
 
