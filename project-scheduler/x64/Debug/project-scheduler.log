@@ -1,25 +1,26 @@
-﻿Build started 4/18/2023 9:35:08 PM.
+﻿Build started 4/19/2023 3:11:53 AM.
      1>Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc110.pdb" /Gd /TP /errorReport:prompt FCFS.cpp IO.cpp LinkedQueue.cpp main.cpp PriorityQueue.cpp Process.cpp Processor.cpp QueueADT.cpp Scheduler.cpp SJF.cpp UI.cpp
-         UI.cpp
-         SJF.cpp
-     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc110.pdb" /Gd /TP /errorReport:prompt Scheduler.cpp
          Scheduler.cpp
-     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>Scheduler.cpp(66): error C2660: 'Processor::Run' : function does not take 0 arguments
-         QueueADT.cpp
-         Processor.cpp
-         Process.cpp
-         PriorityQueue.cpp
-         main.cpp
-     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(18): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-         LinkedQueue.cpp
-         IO.cpp
-         FCFS.cpp
-         Generating Code...
-     1>Done Building Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" (Build target(s)) -- FAILED.
+     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\SJF.h(24): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\fcfs.h(52): warning C4715: 'FCFS::Run' : not all control paths return a value
+     1>c:\my use\first year\2nd term\datastructureandalgorithms\project\process-scheduler\project-scheduler\sjf.h(50): warning C4715: 'SJF::Run' : not all control paths return a value
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.lib" /MACHINE:X64 x64\Debug\FCFS.obj
+         x64\Debug\IO.obj
+         x64\Debug\LinkedQueue.obj
+         x64\Debug\main.obj
+         x64\Debug\PriorityQueue.obj
+         x64\Debug\Process.obj
+         x64\Debug\Processor.obj
+         x64\Debug\QueueADT.obj
+         x64\Debug\Scheduler.obj
+         x64\Debug\SJF.obj
+         x64\Debug\UI.obj
+         project-scheduler.vcxproj -> C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\x64\Debug\project-scheduler.exe
+     1>Done Building Project "C:\my use\first year\2nd term\DataStructureAndAlgorithms\Project\process-scheduler\project-scheduler\project-scheduler.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:04.03
+Time Elapsed 00:00:01.36
