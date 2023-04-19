@@ -45,7 +45,6 @@ void  Scheduler::loadInputFile() {
 void Scheduler::simulator() {
 	loadInputFile();
 	ui.setTimeStep(timeSteps);
-	ui.Print(processorsArray,processessCount,NF,NS,NR,&blkList,&trmList);
 
 	int currentProcessor = 0;
 	while (trmList.getCount() != processessCount) {
@@ -106,6 +105,7 @@ void Scheduler::simulator() {
 		}
 
 		ui.setTimeStep(timeSteps);
+		ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		ui.continueprinting();
 
 	}
