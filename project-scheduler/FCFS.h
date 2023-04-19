@@ -11,31 +11,40 @@ public:
 		run=NULL;
 		ReadyQ=new LinkedQueue<Process*>;
 	}
-	virtual int Run(Process * & ptr,int TS){
-		if(!busy&&!ReadyQ->isEmpty()){ // Checks if there is not processes running and the ready queue isnt empty it dequeues a new process and start processing it
-			ReadyQ->dequeue(run);
+	virtual bool setrun(int TS){
+		if(!busy&&!ReadyQ->isEmpty()){
+	     	ReadyQ->dequeue(run);
 			busy = true;
 			run->setResponseTime(TS);                                    
 			run->setWaitingTime(TS-run->getArrivalTime());
+<<<<<<< HEAD
 			return 0;
 		}
 		if(run){ // if there is a process already executing
+=======
+			return 1 ; 
+		}else 
+			return 0 ;
+	}
+	virtual int Run(Process * & ptr){
+		if( run ){ // if there is a process already executing
+>>>>>>> 9f9a6818f43a74763487f1baaaa265cbc307c9f9
 		  int prob = rand()%100 +1;
-		  if(prob<=15&&prob>=1){// Sent to BLK
+		  if( prob <= 15 && prob >= 1){// Sent to BLK
 		    busy = false;
 		    QueueTimeLeft-=run->getTimeLeft();
 			ptr=run;
 			run = NULL;
 		    return 1;
 		  }
-		  else if(prob<=30&&prob>=20){// Sent to Ready
+		  else if( prob <= 30 && prob >= 20){// Sent to Ready
 			  busy = false;
 			  QueueTimeLeft-=run->getTimeLeft();
 			  ptr=run ; 
 			  run = NULL;
 			  return 2;
 		   }
-		  else if(prob<=60&&prob>=50){// Sent to Terminate
+		  else if( prob <= 60 && prob >= 50 ){// Sent to Terminate
 		      busy = false;
 			  QueueTimeLeft-=run->getTimeLeft();
 			  ptr=run;
@@ -44,9 +53,15 @@ public:
 		    }
 		  else 
 			  return 0;
+<<<<<<< HEAD
 		}else{
 			return -1 ; 
+=======
+		}else if(!busy&&ReadyQ->isEmpty()){
+		return -1 ;
+>>>>>>> 9f9a6818f43a74763487f1baaaa265cbc307c9f9
 		}
+
 	}
 	int exist(){
 	int x=rand();

@@ -135,6 +135,7 @@
     <ClInclude Include="Process.h" />
     <ClInclude Include="Processor.h" />
     <ClInclude Include="QueueADT.h" />
+    <ClInclude Include="RR.h" />
     <ClInclude Include="Scheduler.h" />
     <ClInclude Include="SJF.h" />
     <ClInclude Include="UI.h" />
@@ -148,6 +149,7 @@
     <ClCompile Include="Process.cpp" />
     <ClCompile Include="Processor.cpp" />
     <ClCompile Include="QueueADT.cpp" />
+    <ClCompile Include="RR.cpp" />
     <ClCompile Include="Scheduler.cpp" />
     <ClCompile Include="SJF.cpp" />
     <ClCompile Include="UI.cpp" />
