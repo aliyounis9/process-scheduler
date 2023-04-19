@@ -18,21 +18,18 @@ public:
 	int GetTimeSlice(){
 		return TimeSlice;
 	}
-	virtual void setrun(int TS){
+	virtual bool setrun(int TS){
 		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
 			busy = true;
 			run->setResponseTime(TS);                                    
 			run->setWaitingTime(TS-run->getArrivalTime());
-		}
+			Time = TimeSlice ; 
+			return 1 ; 
+		}else 
+			return 0 ; 
 	}
-	int Run(Process * & ptr,int T){
-		if(!Time){
-			busy=false;
-			Process*Temp=run;
-			ReadyQ->enqueue(Temp);
-			run=NULL;
-		}
+	int Run(Process * & ptr){
 		if(run&&Time){
 				int probability = rand() % 100 + 1;
 				if (probability <= 15 && probability >= 1)
@@ -65,6 +62,14 @@ public:
 				else {
 					run->setTimeLeft(run->getTimeLeft()-1);
 					Time--;
+					if(Time == 0)
+					{
+						busy=false;
+		             	Process*Temp=run;
+		             	ReadyQ->enqueue(Temp);
+			            run=NULL;
+						return 1 ; 
+					}else
 					return 0;
 					}
 			}

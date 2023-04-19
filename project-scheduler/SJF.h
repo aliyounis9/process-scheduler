@@ -11,13 +11,15 @@ public:
 		ReadyQ = new PriorityQueue<Process *> ;
 		run = 0 ; 
 	}
-	virtual void setrun(int TS){
+	virtual bool setrun(int TS){
 		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
 			busy = true;
 			run->setResponseTime(TS);                                    
 			run->setWaitingTime(TS-run->getArrivalTime());
-		}
+			return 1 ; 
+		}else 
+			return 0 ;
 	}
 	virtual int  Run(Process * & ptr){
 		if(run){
