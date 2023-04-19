@@ -17,6 +17,7 @@ public:
 			busy = true;
 			run->setResponseTime(TS);                                    
 			run->setWaitingTime(TS-run->getArrivalTime());
+			return 0;
 		}
 		if(run){ // if there is a process already executing
 		  int prob = rand()%100 +1;
@@ -44,7 +45,7 @@ public:
 		  else 
 			  return 0;
 		}else{
-		return -1 ; 
+			return -1 ; 
 		}
 	}
 	int exist(){

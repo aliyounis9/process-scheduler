@@ -45,10 +45,9 @@ void  Scheduler::loadInputFile() {
 void Scheduler::simulator() {
 	loadInputFile();
 
-
+	int currentProcessor = 0;
 	while (trmList.getCount() != processessCount) {
 		timeSteps++;
-		int currentProcessor = 0;
 		Process currentProcess;
 
 		// checking the new list for processess arriving at current timestamp and moving them to RDY list of processors
@@ -60,13 +59,15 @@ void Scheduler::simulator() {
 			currentProcessor = (currentProcessor + 1) % processorsCount;
 		}
 
-		for (int i = 0; i < processessCount; i++){
+		for (int i = 0; i < processorsCount; i++){
 			// if the processor is idle, it will run the first process on its queue; else, depending on probability, the running process of the processor
-			// will be sent to the BLK, RDY, or TRM lists of the scheduler
+			// will be sent to the BLK, RDY, or TRM lists
 			int prob = processorsArray[i]->Run();
 			if (processorsArray[i]->isBusy()) {
 				Process* runningProcess = processorsArray[i]->getRunning();
-				trmList.enqueue(*runningProcess);
+				if (prob == 1) {
+
+				}
 			}
 		}
 
