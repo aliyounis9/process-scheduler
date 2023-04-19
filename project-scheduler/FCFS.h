@@ -25,7 +25,6 @@ public:
 	}
 	virtual int Run(Process * & ptr){
 		if( run ){ // if there is a process already executing
-		  srand(time(0));
 		  int prob = rand()%100 +1;
 		  if( prob <= 15 && prob >= 1){// Sent to BLK
 		    busy = false;

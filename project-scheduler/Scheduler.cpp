@@ -83,12 +83,11 @@ void Scheduler::simulator() {
 				trmList.enqueue(currentRunningProcess);
 			}
 			if (prob >= 1) {
-				cout << currentRunningProcess->getID() << endl;
+				cout << currentRunningProcess->getID() << " "<< prob<< endl;
 			}
 		}
 
 		// generate a random number (1-100) and if this number is < 10, move the process from the BLK to RDY
-		srand(time(0));
 		int randomNumber = (rand() % 100) + 1;
 		if (randomNumber < 10) {
 			Process* processInBlk;

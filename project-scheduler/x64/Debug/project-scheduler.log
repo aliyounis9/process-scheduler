@@ -1,5 +1,9 @@
-﻿  Scheduler.cpp
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\FCFS.h(28): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-d:\college\cairo uni\computer\first year\second term\data structures and alorithms\process scheduler project\pc-\process-scheduler\project-scheduler\SJF.h(27): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-Scheduler.cpp(92): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+﻿  main.cpp
+main.cpp(7): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+  Scheduler.cpp
+  Generating Code...
+  Compiling...
+  SJF.cpp
+  FCFS.cpp
+  Generating Code...
   project-scheduler.vcxproj -> D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Alorithms\Process Scheduler Project\pc-\process-scheduler\x64\Debug\project-scheduler.exe
