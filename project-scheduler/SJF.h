@@ -24,7 +24,6 @@ public:
 	}
 	virtual int  Run(Process*& ptr) {
 		if (run) {
-			srand(time(0));
 			int x = rand() % 100 + 1;
 			if (x >= 1 && x <= 15) {
 				busy = 0;
@@ -72,7 +71,6 @@ public:
 			TempQ.dequeue(temp);
 			ReadyQ->enqueue(temp);
 		}
-		cout << "\n";
 	}
 	int getRDYCount() {
 		return ReadyQ->getCount();

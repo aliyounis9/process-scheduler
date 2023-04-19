@@ -106,7 +106,6 @@ public:
             TempQ.dequeue(temp);
             ReadyQ->enqueue(temp);
         }
-        cout<<"\n";
     }
 
 };

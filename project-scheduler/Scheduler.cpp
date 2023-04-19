@@ -47,7 +47,7 @@ void Scheduler::simulator() {
 	ui.setTimeStep(timeSteps);
 
 	int currentProcessor = 0;
-	while (trmList.getCount() != processessCount && timeSteps < 500) {
+	while (trmList.getCount() != processessCount ) {
 		timeSteps++;
 		Process* tempProcess;
 
@@ -82,13 +82,9 @@ void Scheduler::simulator() {
 				currentRunningProcess->setTerminateTime(timeSteps);
 				trmList.enqueue(currentRunningProcess);
 			}
-			if (prob >= 1) {
-			//	cout << currentRunningProcess->getID() << endl;
-			}
 		}
 
 		// generate a random number (1-100) and if this number is < 10, move the process from the BLK to RDY
-		srand(time(0));
 		int randomNumber = (rand() % 100) + 1;
 		if (randomNumber < 10) {
 			Process* processInBlk;
