@@ -47,7 +47,7 @@ void Scheduler::simulator() {
 	ui.setTimeStep(timeSteps);
 
 	int currentProcessor = 0;
-	while (trmList.getCount() != processessCount) {
+	while (trmList.getCount() != processessCount && timeSteps < 500) {
 		timeSteps++;
 		Process currentProcess;
 
@@ -105,8 +105,19 @@ void Scheduler::simulator() {
 		}
 
 		ui.setTimeStep(timeSteps);
-		if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
-
+		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
+		
+		Process a7a;
+		if (!blkList.isEmpty()) {
+			while (blkList.dequeue(a7a)) {
+				cout << a7a.getID() << "b" << endl;
+			}
+		}
+		if (!trmList.isEmpty()) {
+			while (blkList.dequeue(a7a)) {
+				cout << a7a.getID() << "t" << endl;
+			}
+		}
 
 	}
 
