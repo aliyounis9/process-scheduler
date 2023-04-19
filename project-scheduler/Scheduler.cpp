@@ -63,7 +63,7 @@ void Scheduler::simulator() {
 		for (int i = 0; i < processessCount; i++){
 			// if the processor is idle, it will run the first process on its queue; else, depending on probability, the running process of the processor
 			// will be sent to the BLK, RDY, or TRM lists of the scheduler
-			int prob = processorsArray[i]->Run();
+			//int prob = processorsArray[i]->Run();
 			if (processorsArray[i]->isBusy()) {
 				Process* runningProcess = processorsArray[i]->getRunning();
 				trmList.enqueue(*runningProcess);

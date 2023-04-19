@@ -12,7 +12,7 @@ public:
 		ReadyQ=new LinkedQueue<Process*>;
 	}
 	virtual void setrun(int TS){
-		if(!busy){
+		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
 			busy = true;
 			run->setResponseTime(TS);                                    
