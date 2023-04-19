@@ -108,7 +108,7 @@ void Scheduler::simulator() {
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
 
-		ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
+		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList);
 		ui.continueprinting();
 
 
