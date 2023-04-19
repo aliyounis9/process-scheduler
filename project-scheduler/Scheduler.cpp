@@ -49,11 +49,12 @@ void Scheduler::simulator() {
 	int currentProcessor = 0;
 	while (trmList.getCount() != processessCount && timeSteps < 500) {
 		timeSteps++;
-		Process currentProcess;
+		Process tempProcess;
 
 		// checking the new list for processess arriving at current timestamp and moving them to RDY list of processors
 		// TO BE MODIFIED: sharing copies of objects, instead of making new objects (using pointers)
-		while (newList.peek(currentProcess) && currentProcess.getArrivalTime() == timeSteps) {
+		while (newList.peek(tempProcess) && tempProcess.getArrivalTime() == timeSteps) {
+			Process currentProcess;
 			newList.dequeue(currentProcess);
 			Process* pointerToCurrentProcess = &currentProcess;
 			processorsArray[currentProcessor]->AddToQueue(pointerToCurrentProcess); // why adding to processors is done through pointers??
@@ -81,6 +82,9 @@ void Scheduler::simulator() {
 				currentRunningProcess->setTerminateTime(timeSteps);
 				trmList.enqueue(*currentRunningProcess);
 			}
+			if (prob >= 1) {
+				cout << currentRunningProcess->getID() << endl;
+			}
 		}
 
 		// generate a random number (1-100) and if this number is < 10, move the process from the BLK to RDY
@@ -105,7 +109,6 @@ void Scheduler::simulator() {
 		}
 
 		ui.setTimeStep(timeSteps);
-<<<<<<< HEAD
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
 		Process a7a;
@@ -115,14 +118,12 @@ void Scheduler::simulator() {
 			}
 		}
 		if (!trmList.isEmpty()) {
-			while (blkList.dequeue(a7a)) {
+			while (trmList.dequeue(a7a)) {
 				cout << a7a.getID() << "t" << endl;
 			}
 		}
-=======
-		ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
-		ui.continueprinting();
->>>>>>> 8e5a9ddc5a4a1f627276132a49d852315a4a2e94
+		//ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
+		//ui.continueprinting();
 
 	}
 
