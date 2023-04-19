@@ -56,7 +56,6 @@ void Scheduler::simulator() {
 		while (newList.peek(tempProcess) && tempProcess->getArrivalTime() == timeSteps) {
 			newList.dequeue(tempProcess);
 			Process* cur = tempProcess;
-
 			processorsArray[currentProcessor]->AddToQueue(cur); // why adding to processors is done through pointers??
 			currentProcessor = (currentProcessor + 1) % processorsCount;
 			tempProcess = nullptr;
@@ -112,17 +111,17 @@ void Scheduler::simulator() {
 		ui.setTimeStep(timeSteps);
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
-		Process* a7a;
-		if (!blkList.isEmpty()) {
-			while (blkList.dequeue(a7a)) {
-				cout << a7a->getID() << "b" << endl;
-			}
-		}
-		if (!trmList.isEmpty()) {
-			while (trmList.dequeue(a7a)) {
-				cout << a7a->getID() << "t" << endl;
-			}
-		}
+		//Process* a7a;
+		//if (!blkList.isEmpty()) {
+		//	while (blkList.dequeue(a7a)) {
+		//		cout << a7a->getID() << "b" << endl;
+		//	}
+		//}
+		//if (!trmList.isEmpty()) {
+		//	while (trmList.dequeue(a7a)) {
+		//		cout << a7a->getID() << "t" << endl;
+		//	}
+		//}
 		//ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		//ui.continueprinting();
 
