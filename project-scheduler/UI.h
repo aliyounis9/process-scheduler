@@ -19,10 +19,10 @@ public:
 	{ return TimeStep ; }
 
 	void continueprinting () {
-	cout<<"PRESS ANY KEY TO MOVE TO NEXT STEP!" <<endl ;
-	cin.clear() ; 
-	cin.ignore(1000000000, '\n'); 
-	system("CLS");
+		cout<<"PRESS ANY KEY TO MOVE TO NEXT STEP!" <<endl ;
+		cin.clear() ; 
+		cin.ignore(1000000000, '\n'); 
+		system("CLS");
 	}
 	void Print(Processor ** pro ,int count ,int NF ,int NS ,int NR , LinkedQueue<Process>* BLK ,LinkedQueue<Process>*TRM) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
 	{    
