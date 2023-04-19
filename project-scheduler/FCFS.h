@@ -1,6 +1,8 @@
 #pragma once
 #include"Processor.h"
 #include"LinkedQueue.h"
+#include <cstdlib>
+#include <time.h>
 
 class FCFS:public Processor
 {
@@ -11,24 +13,19 @@ public:
 		run=NULL;
 		ReadyQ=new LinkedQueue<Process*>;
 	}
-	virtual bool setrun(int TS){
+	virtual bool setRun(int TS){
 		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
 			busy = true;
 			run->setResponseTime(TS);                                    
 			run->setWaitingTime(TS-run->getArrivalTime());
-<<<<<<< HEAD
-			return 0;
+			return true;
 		}
-		if(run){ // if there is a process already executing
-=======
-			return 1 ; 
-		}else 
-			return 0 ;
+		return false;
 	}
 	virtual int Run(Process * & ptr){
 		if( run ){ // if there is a process already executing
->>>>>>> 9f9a6818f43a74763487f1baaaa265cbc307c9f9
+		  srand(time(0));
 		  int prob = rand()%100 +1;
 		  if( prob <= 15 && prob >= 1){// Sent to BLK
 		    busy = false;
@@ -53,35 +50,31 @@ public:
 		    }
 		  else 
 			  return 0;
-<<<<<<< HEAD
 		}else{
 			return -1 ; 
-=======
-		}else if(!busy&&ReadyQ->isEmpty()){
-		return -1 ;
->>>>>>> 9f9a6818f43a74763487f1baaaa265cbc307c9f9
-		}
-
-	}
-	int exist(){
-	int x=rand();
-	bool found=false;
-	LinkedQueue<Process*>TempQ;
-	for (int i = 0; i <ReadyQ->getCount(); i++)
-	{
-		Process*temp;
-		ReadyQ->dequeue(temp);
-		TempQ.enqueue(temp);
-		if (temp->getID()==x)
-		{
-			found=true;
-			break;
 		}
 	}
-	if(found)
-		return x;
-	else return 0;
-}
+	virtual int exist(int id, Process*& ptr){
+		bool found=false;
+		LinkedQueue<Process*>tempQ;
+		while (!ReadyQ->isEmpty()) {
+			Process* temp;
+			ReadyQ->dequeue(temp);
+			if (temp->getID() == id) {
+				found = true;
+				ptr = temp;
+			}
+			else {
+				tempQ.enqueue(temp);
+			}
+		}
+		while(!tempQ.isEmpty()){
+			Process* temp;
+			tempQ.dequeue(temp);
+			ReadyQ->enqueue(temp);
+		}
+		return found;
+	}
 
 	int getRDYCount(){
 			return ReadyQ->getCount() ;  

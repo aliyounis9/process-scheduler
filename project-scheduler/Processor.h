@@ -15,11 +15,13 @@ public:
 		QueueTimeLeft=0;
 		RDYCount=0;
 	}
-	virtual bool setrun(int TS)=0 ; 
+	virtual bool setRun(int TS)=0 ; 
 	virtual int Run(Process * & ptr) = 0 ;
 	virtual bool  isBusy() {
 		return busy;
 	}
+	virtual int exist(int id, Process*& ptr) = 0;
+
 	
 	virtual int  GetTimeLeft(){
 		return QueueTimeLeft;

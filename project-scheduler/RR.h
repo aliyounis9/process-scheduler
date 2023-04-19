@@ -83,6 +83,10 @@ public:
 	virtual QueueADT<Process*>*getReadyQ(){
 		return ReadyQ;
 	}
+
+	virtual int exist(int id, Process*& ptr) {
+		return 0;
+	}
 	virtual void PrintReadyQ() {
         if(ReadyQ->isEmpty())
     return;

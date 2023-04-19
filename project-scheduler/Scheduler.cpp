@@ -44,6 +44,8 @@ void  Scheduler::loadInputFile() {
 }
 void Scheduler::simulator() {
 	loadInputFile();
+	UI ui(timeSteps);
+	ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList);
 
 	int currentProcessor = 0;
 	while (trmList.getCount() != processessCount) {
@@ -59,22 +61,52 @@ void Scheduler::simulator() {
 			currentProcessor = (currentProcessor + 1) % processorsCount;
 		}
 
-		for (int i = 0; i < processorsCount; i++){
-			// if the processor is idle, it will run the first process on its queue; else, depending on probability, the running process of the processor
-<<<<<<< HEAD
-			// will be sent to the BLK, RDY, or TRM lists
-			int prob = processorsArray[i]->Run();
-=======
-			// will be sent to the BLK, RDY, or TRM lists of the scheduler
-			//int prob = processorsArray[i]->Run();
->>>>>>> 9f9a6818f43a74763487f1baaaa265cbc307c9f9
-			if (processorsArray[i]->isBusy()) {
-				Process* runningProcess = processorsArray[i]->getRunning();
-				if (prob == 1) {
 
-				}
+		// checking the RDY List of each processor and moving a process from the RDY list to the running state iff the processor is idle
+		for (int i = 0; i < processorsCount; i++) {
+			if (!processorsArray[i]->isBusy()) {
+				processorsArray[i]->setRun(timeSteps);
 			}
 		}
+
+		// for each process in the run state, it will be either sent to the BLK, RDY, or TRM lists of the scheduler or remain as it (depending on probability)
+		for (int i = 0; i < processorsCount; i++){
+			Process* currentRunningProcess = nullptr;
+			int prob = processorsArray[i]->Run(currentRunningProcess);
+			if (prob == 1) blkList.enqueue(*currentRunningProcess);
+			else if (prob == 2) {
+				processorsArray[currentProcessor]->AddToQueue(currentRunningProcess);
+				currentProcessor = (currentProcessor + 1) % processorsCount;
+			}
+			else if (prob == 3) {
+				currentRunningProcess->setTerminateTime(timeSteps);
+				trmList.enqueue(*currentRunningProcess);
+			}
+		}
+
+		// generate a random number (1-100) and if this number is < 10, move the process from the BLK to RDY
+		srand(time(0));
+		int randomNumber = (rand() % 100) + 1;
+		if (randomNumber < 10) {
+			Process processInBlk;
+			if (blkList.dequeue(processInBlk)) {
+				processorsArray[currentProcessor]->AddToQueue(&processInBlk);
+				currentProcessor = (currentProcessor + 1) % processorsCount;
+			}
+		}
+
+		// generate a random ID (1-100) and if this number is in any FCFS RDY list, it will be killed
+		int randomID = (rand() % 100) + 1;
+		Process* toKill = nullptr;
+		for (int i = 0; i < NF && !toKill; i++) {
+			if (processorsArray[i]->exist(randomID, toKill)) {
+				toKill->setTerminateTime(timeSteps);
+				trmList.enqueue(*toKill);
+			}
+		}
+
+		ui.setTimeStep(timeSteps);
+		ui.continueprinting();
 
 	}
 
