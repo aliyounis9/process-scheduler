@@ -18,14 +18,14 @@ void  Scheduler::loadInputFile() {
 		for (int i = 0; i < processessCount; i++) {
 			int at, pid, ct, io_count;
 			inputFile >> at >> pid >> ct >> io_count;
-			Process currentProcess(at, pid, ct, io_count);
+			Process* currentProcess = new Process(at, pid, ct, io_count);
 			for (int j = 0; j < io_count; j++) {
 				char c;
 				int st, end;
 				inputFile >> c >> st >> c >> end >> c;
 				if (j + 1 < io_count) inputFile >> c;
 				IO curIO(st, end);
-				currentProcess.AddIO(curIO);
+				currentProcess->AddIO(curIO);
 			}
 			newList.enqueue(currentProcess);
 		}
@@ -49,16 +49,17 @@ void Scheduler::simulator() {
 	int currentProcessor = 0;
 	while (trmList.getCount() != processessCount && timeSteps < 500) {
 		timeSteps++;
-		Process tempProcess;
+		Process* tempProcess;
 
 		// checking the new list for processess arriving at current timestamp and moving them to RDY list of processors
 		// TO BE MODIFIED: sharing copies of objects, instead of making new objects (using pointers)
-		while (newList.peek(tempProcess) && tempProcess.getArrivalTime() == timeSteps) {
-			Process currentProcess;
-			newList.dequeue(currentProcess);
-			Process* pointerToCurrentProcess = &currentProcess;
-			processorsArray[currentProcessor]->AddToQueue(pointerToCurrentProcess); // why adding to processors is done through pointers??
+		while (newList.peek(tempProcess) && tempProcess->getArrivalTime() == timeSteps) {
+			newList.dequeue(tempProcess);
+			Process* cur = tempProcess;
+
+			processorsArray[currentProcessor]->AddToQueue(cur); // why adding to processors is done through pointers??
 			currentProcessor = (currentProcessor + 1) % processorsCount;
+			tempProcess = nullptr;
 		}
 
 
@@ -73,14 +74,14 @@ void Scheduler::simulator() {
 		for (int i = 0; i < processorsCount; i++){
 			Process* currentRunningProcess = nullptr;
 			int prob = processorsArray[i]->Run(currentRunningProcess);
-			if (prob == 1) blkList.enqueue(*currentRunningProcess);
+			if (prob == 1) blkList.enqueue(currentRunningProcess);
 			else if (prob == 2) {
 				processorsArray[currentProcessor]->AddToQueue(currentRunningProcess);
 				currentProcessor = (currentProcessor + 1) % processorsCount;
 			}
 			else if (prob == 3) {
 				currentRunningProcess->setTerminateTime(timeSteps);
-				trmList.enqueue(*currentRunningProcess);
+				trmList.enqueue(currentRunningProcess);
 			}
 			if (prob >= 1) {
 				cout << currentRunningProcess->getID() << endl;
@@ -91,9 +92,9 @@ void Scheduler::simulator() {
 		srand(time(0));
 		int randomNumber = (rand() % 100) + 1;
 		if (randomNumber < 10) {
-			Process processInBlk;
+			Process* processInBlk;
 			if (blkList.dequeue(processInBlk)) {
-				processorsArray[currentProcessor]->AddToQueue(&processInBlk);
+				processorsArray[currentProcessor]->AddToQueue(processInBlk);
 				currentProcessor = (currentProcessor + 1) % processorsCount;
 			}
 		}
@@ -104,22 +105,22 @@ void Scheduler::simulator() {
 		for (int i = 0; i < NF && !toKill; i++) {
 			if (processorsArray[i]->exist(randomID, toKill)) {
 				toKill->setTerminateTime(timeSteps);
-				trmList.enqueue(*toKill);
+				trmList.enqueue(toKill);
 			}
 		}
 
 		ui.setTimeStep(timeSteps);
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
-		Process a7a;
+		Process* a7a;
 		if (!blkList.isEmpty()) {
 			while (blkList.dequeue(a7a)) {
-				cout << a7a.getID() << "b" << endl;
+				cout << a7a->getID() << "b" << endl;
 			}
 		}
 		if (!trmList.isEmpty()) {
 			while (trmList.dequeue(a7a)) {
-				cout << a7a.getID() << "t" << endl;
+				cout << a7a->getID() << "t" << endl;
 			}
 		}
 		//ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
