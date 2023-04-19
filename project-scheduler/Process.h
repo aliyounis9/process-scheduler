@@ -83,6 +83,7 @@ int getTerminationTime(){
 int getTurnAroundTime(){
 	return TurnAroundTime;
 }
+
 int getWaitingTime(){
 	return WaitingTime;
 }
