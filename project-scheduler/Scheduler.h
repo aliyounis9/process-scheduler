@@ -22,6 +22,16 @@ public:
 	Scheduler(const char* fileName): inputFile(fileName){
 		timeSteps = processorsCount = processessCount = 0;
 	}
+	Scheduler(){
+		timeSteps = processorsCount = processessCount = 0;
+	}
 	void loadInputFile();
 	void simulator();
+	//////////////////////////start coding for phase 2 ///////////////////////////////////////////////////////
+	int gettimestep()const{
+		return timeSteps ; 
+	}
+    void NewToRdy();
+	void ToBLK(Process * ptr );
+	void ToTRM(Process * ptr );
 };                                                                    

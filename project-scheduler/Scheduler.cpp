@@ -118,3 +118,31 @@ void Scheduler::simulator() {
 	}
 	cout << timeSteps << endl;
 }
+//this func should handle moving processes from new list to the shortest ready queue of the  processoers BY BAHR 
+void Scheduler::NewToRdy(){
+	Process * tempProcess = 0;
+	while (newList.peek(tempProcess) && tempProcess->getArrivalTime() == timeSteps) {
+			newList.dequeue(tempProcess);
+			int Processorindex = 0 ; 
+			for (int i = 0; i < processessCount; i++)
+			{
+				if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
+					Processorindex = i ;
+			}
+			processorsArray[Processorindex]->AddToQueue(tempProcess);
+			tempProcess = nullptr;
+		}
+}
+
+
+void Scheduler :: ToBLK(Process * ptr ){
+	if(ptr){
+		blkList.enqueue(ptr);
+	}
+}
+
+void Scheduler :: ToTRM(Process * ptr ){
+	if(ptr){
+		trmList.enqueue(ptr);
+	}
+}

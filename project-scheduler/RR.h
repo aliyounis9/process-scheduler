@@ -1,7 +1,10 @@
+#pragma once
 #include "Processor.h"
 #include "PriorityQueue.h"
+#include"Scheduler.h"
 class RR:public Processor
-{int TimeSlice;
+{
+int TimeSlice;
 int Time;
 public:
 	RR(int T){
@@ -107,5 +110,32 @@ public:
             ReadyQ->enqueue(temp);
         }
     }
-
+	/////////////////////strart coding for phase 2 /////////////////////////////////////////////
+	 virtual void SchedAlgo(Scheduler * sch){
+		if(busy){
+			if(run->getNextIO()->getArrival()==sch->gettimestep()){
+			busy = 0 ;
+			QueueTimeLeft-=run->getTimeLeft();
+			sch->ToBLK(run);
+			run = 0 ; 
+			}
+			run->setTimeLeft(run->getTimeLeft()-1);
+			Time--;
+			if(run->getTimeLeft()==0){
+			 busy = false;
+			 QueueTimeLeft-=run->getTimeLeft();
+			 sch->ToTRM(run);
+			 run = 0;
+			}
+			if(Time==0&&run){
+			 busy = false;
+			 QueueTimeLeft-=run->getTimeLeft();
+			 AddToQueue(run);
+			 run = 0;
+			}
+		}
+		else{
+			setRun(sch->gettimestep());
+		}
+	}
 };

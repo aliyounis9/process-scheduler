@@ -1,6 +1,8 @@
 #pragma once
 #include"QueueADT.h"
 #include"Process.h"
+#include"Scheduler.h"
+
 
 class Processor{
 protected:
@@ -40,5 +42,6 @@ public:
 		return run ;
 	}
 	virtual QueueADT<Process*>*  getReadyQ() = 0; 
-
+		//////////////////////////start coding for phase 2 ///////////////////////////////////////////////////////
+	virtual void SchedAlgo(Scheduler * sch) = 0 ;
 };

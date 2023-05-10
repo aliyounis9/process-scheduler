@@ -1,6 +1,7 @@
 #pragma once
 #include "Processor.h"
 #include"PriorityQueue.h"
+#include"Scheduler.h"
 #include <cstdlib>
 #include <time.h>
 class SJF : public Processor
@@ -85,6 +86,28 @@ public:
 
 	~SJF(){
 	
+	}
+	/////////////////////strart coding for phase 2 /////////////////////////////////////////////
+
+	 virtual void SchedAlgo(Scheduler * sch){
+		if(busy){
+			if(run->getNextIO()->getArrival()==sch->gettimestep()){
+			busy = 0 ;
+			QueueTimeLeft-=run->getTimeLeft();
+			sch->ToBLK(run);
+			run = 0 ; 
+			}
+			run->setTimeLeft(run->getTimeLeft()-1);
+			if(run->getTimeLeft()==0){
+			 busy = false;
+			 QueueTimeLeft-=run->getTimeLeft();
+			 sch->ToTRM(run);
+			 run = 0;
+			}
+		}
+		else{
+			setRun(sch->gettimestep());
+		}
 	}
 };
 

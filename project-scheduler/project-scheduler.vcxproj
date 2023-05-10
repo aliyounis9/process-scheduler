@@ -141,18 +141,8 @@
     <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FCFS.cpp" />
-    <ClCompile Include="IO.cpp" />
-    <ClCompile Include="LinkedQueue.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="PriorityQueue.cpp" />
-    <ClCompile Include="Process.cpp" />
-    <ClCompile Include="Processor.cpp" />
-    <ClCompile Include="QueueADT.cpp" />
-    <ClCompile Include="RR.cpp" />
     <ClCompile Include="Scheduler.cpp" />
-    <ClCompile Include="SJF.cpp" />
-    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
