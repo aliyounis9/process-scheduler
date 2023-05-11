@@ -1,12 +1,14 @@
 #pragma once
 #include <fstream>
 #include "Processor.h"
-#include"FCFS.h"
-#include"SJF.h"
+//#include"FCFS.h"
+
 #include <cstdlib>
 #include <time.h>
 #include"UI.h"
-#include"RR.h"
+
+
+
 
 class Scheduler {
 	enum { maxProcessorsCount = 500 }; // maximum number of processors

@@ -1,4 +1,7 @@
 #include"Scheduler.h"
+#include "FCFS.h"
+#include"RR.h"
+#include"SJF.h"
 
 void  Scheduler::loadInputFile() {
 	if (inputFile.is_open()) { // if input file is open, scheduler will read all data

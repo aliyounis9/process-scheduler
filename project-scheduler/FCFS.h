@@ -5,6 +5,7 @@
 #include <cstdlib>
 #include <time.h>
 
+
 class FCFS:public Processor
 {
 public:
@@ -112,17 +113,18 @@ public:
 			sch->ToBLK(run);
 			run = 0 ; 
 			}
+			if (run){
 			run->setTimeLeft(run->getTimeLeft()-1);
-			if(run->getTimeLeft()==0){
+			if( run->getTimeLeft()==0){
 			 busy = false;
 			 QueueTimeLeft-=run->getTimeLeft();
 			 sch->ToTRM(run);
 			 run = 0;
-			}
+			}}
 		}
 		else{
 			setRun(sch->gettimestep());
 		}
 	}
-
+	
 };
