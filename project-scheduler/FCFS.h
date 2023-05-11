@@ -107,14 +107,15 @@ public:
 	///////////////start coding for phase 2 //////////////////////////////
 	virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
-			if(run->getNextIO()->getArrival()+run->getArrivalTime()==sch->gettimestep()){
+			run->setTimeLeft(run->getTimeLeft()-1);
+			run->getNextIO()->setTimeLeft(run->getNextIO()->getTimeLeft()-1);
+			if(run->getNextIO()->getTimeLeft()==0){
 			busy = 0 ;
 			QueueTimeLeft-=run->getTimeLeft();
 			sch->ToBLK(run);
 			run = 0 ; 
 			}
 			if (run){
-			run->setTimeLeft(run->getTimeLeft()-1);
 			if( run->getTimeLeft()==0){
 			 busy = false;
 			 QueueTimeLeft-=run->getTimeLeft();
