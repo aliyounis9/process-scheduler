@@ -39,5 +39,6 @@ public:
 	void ToBLK(Process * ptr );
 	void ToTRM(Process * ptr );
 	void doFork(Process*& running); 
-
+	void killProcess(int id);
+	void doWorkStealing();
 };                                                                    

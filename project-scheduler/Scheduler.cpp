@@ -11,6 +11,9 @@ void  Scheduler::loadInputFile() {
 
 		inputFile >> RR_timeSlice >> RTF >> maxW >> STL >> forkProbability >> processessCount;
 
+
+		STL = 2;
+
 		// create processors of each type: they are categorized according to their indices
 		for (int i = 0; i < processorsCount; i++) {
 			if (i < NF) processorsArray[i] = new FCFS;
@@ -74,47 +77,59 @@ void Scheduler::simulator() {
 		}
 
 		// for each process in the run state, it will be either sent to the BLK, RDY, or TRM lists of the scheduler or remain as it (depending on probability)
-		for (int i = 0; i < processorsCount; i++){
-			Process* currentRunningProcess = nullptr;
-			int prob = processorsArray[i]->Run(currentRunningProcess);
-			if (prob == 1)
-				blkList.enqueue(currentRunningProcess);
-			else if (prob == 2) {
- 				processorsArray[currentProcessor]->AddToQueue(currentRunningProcess);
-				currentProcessor = (currentProcessor + 1) % processorsCount;
-			}
-			else if (prob == 3) {
-				currentRunningProcess->setTerminateTime(timeSteps);
-				trmList.enqueue(currentRunningProcess);
-			}
-		}
+		//for (int i = 0; i < processorsCount; i++){
+		//	Process* currentRunningProcess = nullptr;
+		//	int prob = processorsArray[i]->Run(currentRunningProcess);
+		//	if (prob == 1)
+		//		blkList.enqueue(currentRunningProcess);
+		//	else if (prob == 2) {
+ 	//			processorsArray[currentProcessor]->AddToQueue(currentRunningProcess);
+		//		currentProcessor = (currentProcessor + 1) % processorsCount;
+		//	}
+		//	else if (prob == 3) {
+		//		currentRunningProcess->setTerminateTime(timeSteps);
+		//		trmList.enqueue(currentRunningProcess);
+		//	}
+		//}
 
 		// generate a random number (1-100) and if this number is < 10, move the process from the BLK to RDY
-		int randomNumber = 5 ;//(rand() % 100) + 1;
-		if (randomNumber < 10) {
-			Process* processInBlk = 0;
-			if (!blkList.isEmpty()) {
-				blkList.dequeue(processInBlk);
-				processorsArray[currentProcessor]->AddToQueue(processInBlk);
-				currentProcessor = (currentProcessor + 1) % processorsCount;
-			}
-		}
+		//int randomNumber = 5 ;//(rand() % 100) + 1;
+		//if (randomNumber < 10) {
+		//	Process* processInBlk = 0;
+		//	if (!blkList.isEmpty()) {
+		//		blkList.dequeue(processInBlk);
+		//		processorsArray[currentProcessor]->AddToQueue(processInBlk);
+		//		currentProcessor = (currentProcessor + 1) % processorsCount;
+		//	}
+		//}
 
 		// generate a random ID (1-100) and if this number is in any FCFS RDY list, it will be killed
-		int randomID = (rand() % 100) + 1;
-		Process* toKill = nullptr;
-		for (int i = 0; i < NF && !toKill; i++) {
-			if (processorsArray[i]->exist(randomID, toKill)) {
-				toKill->setTerminateTime(timeSteps);
-				trmList.enqueue(toKill);
-			}
-		}
+		//int randomID = (rand() % 100) + 1;
+		//Process* toKill = nullptr;
+		//for (int i = 0; i < NF && !toKill; i++) {
+		//	if (processorsArray[i]->exist(randomID, toKill)) {
+		//		toKill->setTerminateTime(timeSteps);
+		//		trmList.enqueue(toKill);
+		//	}
+		//}
 
 		ui.setTimeStep(timeSteps);
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
 		for(int i = 0; i < NF; i++){
 			processorsArray[i]->checkFork(forkProbability, this);
+		}
+
+		pair<int, int> toKillProcess;
+		if(sigKillTimes.peek(toKillProcess)){
+			if(toKillProcess.first == timeSteps){
+				sigKillTimes.dequeue(toKillProcess);
+				killProcess(toKillProcess.second);
+			}
+		}
+
+		if(timeSteps%STL == 0){
+			doWorkStealing();
 		}
 
 		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList);
@@ -150,7 +165,7 @@ void Scheduler :: ToBLK(Process * ptr ){
 
 void Scheduler::doFork(Process*& running){
 	int ct = running->getTimeLeft();
-	Process* currentProcess = new Process(timeSteps, maxID++, ct, 0);
+	Process* currentProcess = new Process(timeSteps, ++maxID, ct, 0);
 	processessCount++;
 	running->setChild(currentProcess);
 	currentProcess->setParent(running);
@@ -164,8 +179,53 @@ void Scheduler::doFork(Process*& running){
 	currentProcess = nullptr;
 }
 
+void Scheduler::doWorkStealing(){
+	int LQF = 0 , SQF = INT_MAX; 
+	int Lindex =-1 , Sindex=-1 ; 
+	for (int i = 0; i < processorsCount; i++){
+		int t = processorsArray[i]->GetTimeLeft();
+		if(t > LQF) LQF = t, Lindex = i;
+		if(t < SQF) SQF = t, Sindex = i;
+	}
+	if(~Lindex && ~Sindex && LQF+0ll-SQF > 40ll*LQF/100){
+		cout<<"HERE WE GO "<<Lindex<<" "<<Sindex;
+		Process * Temp = nullptr ; 
+		processorsArray[Lindex]->getReadyQ()->dequeue(Temp);
+		if(Temp) cout<<" id"<<Temp->getID()<<"\n"; 
+		if(Temp) processorsArray[Sindex]->AddToQueue(Temp);
+		LQF = processorsArray[Lindex]->GetTimeLeft();
+		SQF = processorsArray[Sindex]->GetTimeLeft();
+	}
+}
+
+void Scheduler::killProcess(int id){
+	Process *toKill = nullptr;
+	bool found = false;
+	for(int i= 0; i < NF && !found; i++){
+		if(processorsArray[i]->exist(id, toKill) || (processorsArray[i]->getrun() && processorsArray[i]->getrun()->getID() == id)) {
+			found = true;
+			if(!toKill) toKill = processorsArray[i]->getrun();
+		}
+		if(found && !toKill->getIsKilled()){
+			Process *firstChild = toKill->getFirstChild();
+			Process *secondChild = toKill->getSecondChild();
+			cout<<"will kill "<<id<<" "; 
+			if(firstChild) cout<<"child "<<firstChild->getID()<<" ";
+			if(secondChild) cout<<"child "<<secondChild->getID()<<" ";
+			cout<<"\n";
+
+			if(firstChild) killProcess(firstChild->getID()); 
+			if(secondChild) killProcess(secondChild->getID());
+			ToTRM(toKill);
+			cout<<"\n";
+			toKill = nullptr;
+		}
+	}
+}
+
 void Scheduler :: ToTRM(Process * ptr ){
 	if(ptr){
+		ptr->setIsKilled(true);
 		trmList.enqueue(ptr);
 	}
 }

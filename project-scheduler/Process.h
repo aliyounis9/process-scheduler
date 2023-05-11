@@ -20,7 +20,6 @@ private:
 	Process* children[2];
 	Process * parent;
 	bool isKilled;
-	bool isfinisedd; 
 public:
 
 Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
@@ -30,16 +29,13 @@ Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
 		IO_n=IOn;
 		timeLeft=ct;
 		TimeDone = 0;
-		isfinisedd= isKilled = 0;
+		isKilled = 0;
 		nextIO = nullptr;
 		children[0] = nullptr;
 		children[1] = nullptr;
 		parent = nullptr; 
 	}
 
-void setisfinised(bool a ) {isfinisedd =a ;
-isKilled = a ;  
-}
 
 void setChild(Process *child){
 	if(children[0] && children[1]) return;
@@ -64,11 +60,6 @@ Process* getSecondChild(){
 	return children[1];
 }
 
-
-bool isfinised () {
-	return isfinisedd ;
-
-}
 
 void setID(int x){
 	ID=x;

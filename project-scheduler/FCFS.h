@@ -119,7 +119,7 @@ public:
 			if( run->getTimeLeft()==0){
 			 busy = false;
 			 QueueTimeLeft-=run->getTimeLeft();
-			 sch->ToTRM(run);
+			 sch->killProcess(run->getID());
 			 run = 0;
 			}}
 		}
