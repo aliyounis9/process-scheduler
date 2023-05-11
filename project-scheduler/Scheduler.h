@@ -21,10 +21,12 @@ private:
 	int maxID; 
 	LinkedQueue<pair<int, int>> sigKillTimes;
 	ifstream inputFile;
+	Process * currentIo ;
 public:
 	Scheduler(const char* fileName): inputFile(fileName){
 		timeSteps = processorsCount = processessCount = 0;
 		maxID = 0;
+		currentIo = nullptr ;
 	}
 	Scheduler(){
 		timeSteps = processorsCount = processessCount = 0;
@@ -38,6 +40,7 @@ public:
     void NewToRdy();
 	void ToBLK(Process * ptr );
 	void ToTRM(Process * ptr );
+	void BLKToRDY();
 	void doFork(Process*& running); 
 	void killProcess(int id);
 	void doWorkStealing();

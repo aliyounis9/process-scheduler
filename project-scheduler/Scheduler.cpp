@@ -32,7 +32,7 @@ void  Scheduler::loadInputFile() {
 				int st, end;
 				inputFile >> c >> st >> c >> end >> c;
 				if (j + 1 < io_count) inputFile >> c;
-				IO curIO(st, end);
+				IO * curIO= new IO(st, end);
 				currentProcess->AddIO(curIO);
 			}
 			newList.enqueue(currentProcess);
@@ -228,4 +228,27 @@ void Scheduler :: ToTRM(Process * ptr ){
 		ptr->setIsKilled(true);
 		trmList.enqueue(ptr);
 	}
+}
+
+void Scheduler :: BLKToRDY(){
+	if(!currentIo){
+		blkList.dequeue(currentIo);
+		if(currentIo->getNextIO())
+		currentIo->getNextIO()->setArrival(timeSteps);
+	}
+	currentIo->getNextIO()->setTimeLeft(currentIo->getNextIO()->getTimeLeft()-1);
+	if(currentIo->getNextIO()->getTimeLeft()==0){
+		currentIo->getNextIO()->setDone(1);
+		int Processorindex = 0 ; 
+			for (int i = 0; i < processessCount; i++)
+			{
+				if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
+					Processorindex = i ;
+			}
+			processorsArray[Processorindex]->AddToQueue(currentIo);
+			currentIo->popIO();
+		currentIo = nullptr ;
+	}
+
+
 }

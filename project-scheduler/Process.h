@@ -15,7 +15,7 @@ private:
 	int WaitingTime;
 	int IO_n;
 	int timeLeft;
-	LinkedQueue <IO> IOs;
+	LinkedQueue <IO * > IOs;
 	IO* nextIO;
 	Process* children[2];
 	Process * parent;
@@ -129,32 +129,38 @@ int getTurnAroundTime(){
 int getWaitingTime(){
 	return WaitingTime;
 }
-int getIO_n(){
+int getIO_n(){ //////////////
 	return IO_n;
 }
 int getTimeLeft(){
 	return timeLeft;
 }
-IO* getNextIO(){
+IO* getNextIO(){ ///////////
+	if(!nextIO){
+	
+		IOs.dequeue(nextIO);
+	}
+	
 	return nextIO;
+
 }
 bool operator >(Process x){
 	return CT>x.CT;
 }
-void AddIO(IO &io){
+void AddIO(IO * io){ ///////////
 	IOs.enqueue(io);
 }
-void popIO(){
-		IO ret;
+void popIO(){    ////////////////
+		IO* ret;
 		if (IOs.isEmpty())
 			return;
 		IOs.dequeue(ret);
-		if (ret.isDone())
+		if (ret->isDone())
 			return;
-		IO back = ret;
-		nextIO = new IO(ret);
+		IO * back = ret;
+		nextIO = new IO(*ret);
 	
-		back.setDone(true);
+		back->setDone(true);
 		IOs.enqueue(back);
 		return;
 }
