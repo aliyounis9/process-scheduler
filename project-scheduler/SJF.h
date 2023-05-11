@@ -92,7 +92,7 @@ public:
 
 	 virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
-			if(run->getNextIO()->getArrival()==sch->gettimestep()){
+			if(run->getNextIO()->getArrival()+run->getArrivalTime()==sch->gettimestep()){
 			busy = 0 ;
 			QueueTimeLeft-=run->getTimeLeft();
 			sch->ToBLK(run);
