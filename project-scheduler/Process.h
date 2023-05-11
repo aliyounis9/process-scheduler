@@ -17,6 +17,10 @@ private:
 	int timeLeft;
 	LinkedQueue <IO> IOs;
 	IO* nextIO;
+	Process* children[2];
+	Process * parent;
+	bool isKilled;
+	bool isfinisedd; 
 public:
 
 Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
@@ -26,8 +30,45 @@ Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
 		IO_n=IOn;
 		timeLeft=ct;
 		TimeDone = 0;
+		isfinisedd= isKilled = 0;
 		nextIO = nullptr;
+		children[0] = nullptr;
+		children[1] = nullptr;
+		parent = nullptr; 
 	}
+
+void setisfinised(bool a ) {isfinisedd =a ;
+isKilled = a ;  
+}
+
+void setChild(Process *child){
+	if(children[0] && children[1]) return;
+	if(children[0]) children[1] = child;
+	else children[0] = child;
+}
+
+void setParent( Process * Par ){
+parent = Par;
+}
+
+Process * getParent () const {
+	return parent ; 
+}
+
+Process* getFirstChild(){
+	return children[0];
+}
+
+
+Process* getSecondChild(){
+	return children[1];
+}
+
+
+bool isfinised () {
+	return isfinisedd ;
+
+}
 
 void setID(int x){
 	ID=x;
@@ -62,6 +103,16 @@ void setTimeLeft(int x){
 void SetNextIO(IO* io){
 	nextIO=io;
 }
+
+
+void setIsKilled(bool state){
+	isKilled = state;
+}
+
+bool getIsKilled(){
+	return isKilled;
+}
+
 int getID(){
 	return ID;
 }

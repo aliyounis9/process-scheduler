@@ -22,6 +22,7 @@ void  Scheduler::loadInputFile() {
 		for (int i = 0; i < processessCount; i++) {
 			int at, pid, ct, io_count;
 			inputFile >> at >> pid >> ct >> io_count;
+			maxID = max(maxID, pid);
 			Process* currentProcess = new Process(at, pid, ct, io_count);
 			for (int j = 0; j < io_count; j++) {
 				char c;
@@ -56,7 +57,6 @@ void Scheduler::simulator() {
 		Process* tempProcess;
 
 		// checking the new list for processess arriving at current timestamp and moving them to RDY list of processors
-		// TO BE MODIFIED: sharing copies of objects, instead of making new objects (using pointers)
 		while (newList.peek(tempProcess) && tempProcess->getArrivalTime() == timeSteps) {
 			newList.dequeue(tempProcess);
 			Process* cur = tempProcess;
@@ -113,6 +113,9 @@ void Scheduler::simulator() {
 		ui.setTimeStep(timeSteps);
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
+		for(int i = 0; i < NF; i++){
+			processorsArray[i]->checkFork(forkProbability, this);
+		}
 
 		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList);
 		ui.continueprinting();
@@ -142,6 +145,23 @@ void Scheduler :: ToBLK(Process * ptr ){
 	if(ptr){
 		blkList.enqueue(ptr);
 	}
+}
+
+
+void Scheduler::doFork(Process*& running){
+	int ct = running->getTimeLeft();
+	Process* currentProcess = new Process(timeSteps, maxID++, ct, 0);
+	processessCount++;
+	running->setChild(currentProcess);
+	currentProcess->setParent(running);
+	int Processorindex = 0 ; 
+	for (int i = 0; i < NF; i++)
+	{		
+		if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
+				Processorindex = i ;
+	}
+	processorsArray[Processorindex]->AddToQueue(currentProcess);
+	currentProcess = nullptr;
 }
 
 void Scheduler :: ToTRM(Process * ptr ){

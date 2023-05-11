@@ -18,11 +18,13 @@ private:
 	int processorsCount, processessCount, timeSteps, NF, NS, NR, RR_timeSlice, RTF, maxW, STL, forkProbability;
 	Processor* processorsArray[maxProcessorsCount];
 	LinkedQueue<Process*> newList, trmList, blkList;
+	int maxID; 
 	LinkedQueue<pair<int, int>> sigKillTimes;
 	ifstream inputFile;
 public:
 	Scheduler(const char* fileName): inputFile(fileName){
 		timeSteps = processorsCount = processessCount = 0;
+		maxID = 0;
 	}
 	Scheduler(){
 		timeSteps = processorsCount = processessCount = 0;
@@ -36,4 +38,6 @@ public:
     void NewToRdy();
 	void ToBLK(Process * ptr );
 	void ToTRM(Process * ptr );
+	void doFork(Process*& running); 
+
 };                                                                    

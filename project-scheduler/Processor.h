@@ -45,4 +45,6 @@ public:
 	virtual QueueADT<Process*>*  getReadyQ() = 0; 
 		//////////////////////////start coding for phase 2 ///////////////////////////////////////////////////////
 	virtual void SchedAlgo(Scheduler * sch) = 0 ;
+	virtual void checkFork(int forkProbability, Scheduler *Sh){
+	}
 };
