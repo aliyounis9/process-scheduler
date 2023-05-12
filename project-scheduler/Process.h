@@ -20,6 +20,7 @@ private:
 	Process* children[2];
 	Process * parent;
 	bool isKilled;
+	int totalIO_D ; 
 public:
 
 Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
@@ -30,6 +31,7 @@ Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
 		timeLeft=ct;
 		TimeDone = 0;
 		isKilled = 0;
+		totalIO_D=0 ; 
 		nextIO = nullptr;
 		children[0] = nullptr;
 		children[1] = nullptr;
@@ -95,7 +97,9 @@ void SetNextIO(IO* io){
 	nextIO=io;
 }
 
-
+int getTotalIO_D()const{
+return totalIO_D ; 
+}
 void setIsKilled(bool state){
 	isKilled = state;
 }
@@ -149,6 +153,7 @@ bool operator >(Process x){
 }
 void AddIO(IO * io){ ///////////
 	IOs.enqueue(io);
+	totalIO_D+=io->getDuration();
 }
 void popIO(){    ////////////////
 		IO* ret;

@@ -164,9 +164,11 @@ void Scheduler :: ToBLK(Process * ptr ){
 
 
 void Scheduler::doFork(Process*& running){
+	
 	int ct = running->getTimeLeft();
 	Process* currentProcess = new Process(timeSteps, ++maxID, ct, 0);
 	processessCount++;
+	forkCount++;
 	running->setChild(currentProcess);
 	currentProcess->setParent(running);
 	int Processorindex = 0 ; 
@@ -191,7 +193,7 @@ void Scheduler::doWorkStealing(){
 		cout<<"HERE WE GO "<<Lindex<<" "<<Sindex;
 		Process * Temp = nullptr ; 
 		processorsArray[Lindex]->getReadyQ()->dequeue(Temp);
-		if(Temp) cout<<" id"<<Temp->getID()<<"\n"; 
+		if(Temp) workStealCount++;
 		if(Temp) processorsArray[Sindex]->AddToQueue(Temp);
 		LQF = processorsArray[Lindex]->GetTimeLeft();
 		SQF = processorsArray[Sindex]->GetTimeLeft();
@@ -217,6 +219,7 @@ void Scheduler::killProcess(int id){
 			if(firstChild) killProcess(firstChild->getID()); 
 			if(secondChild) killProcess(secondChild->getID());
 			ToTRM(toKill);
+			killedCount++;
 			cout<<"\n";
 			toKill = nullptr;
 		}
@@ -225,6 +228,12 @@ void Scheduler::killProcess(int id){
 
 void Scheduler :: ToTRM(Process * ptr ){
 	if(ptr){
+		ptr->setTerminateTime(timeSteps);
+
+		ptr->setTurnAroundTime(ptr->getTerminationTime()-ptr->getArrivalTime());
+		addToTotalTRT(ptr->getTurnAroundTime());
+		ptr->setWaitingTime(ptr->getTurnAroundTime()-ptr->getCPUtime());
+		addToTotalWT(ptr->getWaitingTime());
 		ptr->setIsKilled(true);
 		trmList.enqueue(ptr);
 	}
@@ -253,3 +262,57 @@ void Scheduler :: BLKToRDY(){
 	}
 
 }
+
+int Scheduler:: getAvgWT(){
+     return avgWT ;
+}
+
+int Scheduler:: getAvgRT(){
+     return avgRT ;
+}
+
+int Scheduler:: getAvgTRT(){
+     return avgTRT ;
+}
+
+void Scheduler:: setAvgWT(){
+     int s = 0 ; 
+	 for (int i = 0; i < processessCount; i++)
+	 {
+
+	 }
+}
+void Scheduler:: output(){
+	outputFile <<"TT  PID  AT  CT  IO_D  WT  RT  TRT"<<endl;
+	while(!trmList.isEmpty()){
+	Process * ptr = nullptr ; 
+	trmList.dequeue(ptr);
+	addToTotalRT(ptr->getResponseTime());
+	outputFile<<ptr->getTerminationTime()<<"  "<<ptr->getID()<<"  "<<ptr->getArrivalTime()<<"  "<<ptr->getCPUtime()<<"  "<<ptr->getTotalIO_D()<<"  "<<ptr->getWaitingTime()<<"  "<<ptr->getResponseTime()<<"  "<<ptr->getTurnAroundTime()<<endl;
+	ptr=nullptr;
+	}
+	outputFile<<"Processes: "<<processessCount<<endl;
+	outputFile<<"Avg WT = "<<double(totalWT)/processessCount<<",	 Avg RT = "<<double(totalRT)/processessCount<<",		Avg TRT = "<<double(totalTRT)/processessCount<<endl;
+	outputFile<<"Migration %:	RTF = "<<RTFCount/processessCount<<"%,	MaxW = "<<MaxWCount/processessCount<<"%"<<endl;
+	outputFile<<"Work Steal%: "<<workStealCount/processessCount<<"%"<<endl;
+	outputFile<<"Forked Process: "<<forkCount/processessCount<<"%"<<endl;
+	outputFile<<"Killed Process: "<<killedCount/processessCount<<"%"<<endl<<endl;
+	outputFile<<"Processors: "<<processorsCount<<" ["<<NF<<" FCFS, "<<NS<<" SJF, "<<NR<<" RR]"<<endl;
+	outputFile<<"Processors Load"<<endl;
+	for (int i = 0; i < processorsCount; i++)
+	{
+		outputFile<<"P"<<i+1<<"="<<processorsArray[i]->getBusyTime()/totalTRT<<"%,	" ;
+	}
+	outputFile<<endl<<endl;
+	outputFile<<"Processors Utiliz"<<endl;
+    for (int i = 0; i < processorsCount; i++)
+	{
+		outputFile<<"P"<<i+1<<"="<<processorsArray[i]->getBusyTime()/(processorsArray[i]->getBusyTime()+processorsArray[i]->getIdelTime())<<"%,	" ;
+	}
+	outputFile<<endl;
+	calcTotalUtiliz();
+	outputFile<<"Avg Utilization = "<<double(TotalUtiliz)/processorsCount<<"%"<<endl;
+
+
+}
+

@@ -12,12 +12,18 @@ Process * run ;
 QueueADT<Process*>*ReadyQ;
 bool busy;
 int RDYCount;
+int busyTime ;
+int idleTime ;
 public:
 	Processor(){
 		busy=false;
 		QueueTimeLeft=0;
 		RDYCount=0;
+		busyTime=0;
+		idleTime=0;
 	}
+	int getBusyTime(){return busyTime ;} 
+	int getIdelTime(){return idleTime ;}
 	virtual bool setRun(int TS)=0 ; 
 	virtual int Run(Process * & ptr) = 0 ;
 	virtual bool  isBusy() {

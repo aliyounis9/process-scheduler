@@ -22,22 +22,72 @@ private:
 	LinkedQueue<pair<int, int>> sigKillTimes;
 	ifstream inputFile;
 	Process * currentIo ;
+	ofstream outputFile;
+	double avgWT ;
+	double avgRT ;
+	double avgTRT ;
+	int totalWT ; 
+	int totalTRT ;
+	int totalRT;
+	int RTFCount;
+	int MaxWCount;
+	int workStealCount ;
+	int forkCount;
+	int killedCount;
+	int TotalUtiliz;
 public:
-	Scheduler(const char* fileName): inputFile(fileName){
+	Scheduler(const char* fileName,const char * fileoutput): inputFile(fileName),outputFile(fileoutput){
 		timeSteps = processorsCount = processessCount = 0;
+		totalWT =0;
+		totalTRT=0;
+		totalRT=0;
 		maxID = 0;
+		RTFCount=MaxWCount=0;
+		workStealCount=0;
+		forkCount=0;
+		killedCount=0;
 		currentIo = nullptr ;
+		TotalUtiliz =0;
 	}
 	Scheduler(){
 		timeSteps = processorsCount = processessCount = 0;
 	}
 	void loadInputFile();
 	void simulator();
+
 	//////////////////////////start coding for phase 2 ///////////////////////////////////////////////////////
 	int gettimestep()const{
 		return timeSteps ; 
 	}
-    void NewToRdy();
+
+	void output();
+	void setAvgWT();
+	void setAvgRT();
+	void setAvgTRT();
+    int getAvgWT();
+	int getAvgRT();
+	int getAvgTRT();
+	
+	void addToTotalWT(int x ){
+	totalWT+=x;
+	}
+	int getTotalWT(){return totalWT ; }
+	void addToTotalTRT(int x){
+	totalTRT+=x;
+	}
+	int getTotalTRT(){return totalTRT ; }
+	void addToTotalRT(int x){
+	totalRT+=x;
+	}
+	int getTotalRT(){return totalRT ; }
+
+	void calcTotalUtiliz(){
+		for (int i = 0; i < processorsCount; i++)
+		{
+			TotalUtiliz+=processorsArray[i]->getBusyTime()/(processorsArray[i]->getBusyTime()+processorsArray[i]->getIdelTime());
+		}
+	}
+	void NewToRdy();
 	void ToBLK(Process * ptr );
 	void ToTRM(Process * ptr );
 	void BLKToRDY();
