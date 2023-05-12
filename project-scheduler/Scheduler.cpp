@@ -233,9 +233,10 @@ void Scheduler :: ToTRM(Process * ptr ){
 void Scheduler :: BLKToRDY(){
 	if(!currentIo){
 		blkList.dequeue(currentIo);
-		if(currentIo->getNextIO())
+		if(currentIo&&currentIo->getNextIO())
 		currentIo->getNextIO()->setArrival(timeSteps);
 	}
+	if(currentIo){
 	currentIo->getNextIO()->setTimeLeft(currentIo->getNextIO()->getTimeLeft()-1);
 	if(currentIo->getNextIO()->getTimeLeft()==0){
 		currentIo->getNextIO()->setDone(1);
@@ -249,6 +250,6 @@ void Scheduler :: BLKToRDY(){
 			currentIo->popIO();
 		currentIo = nullptr ;
 	}
-
+	}
 
 }
