@@ -96,22 +96,25 @@ public:
 
 	 virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
-			busyTime++;
-            run->setTimeLeft(run->getTimeLeft()-1);
-			run->getNextIO()->setTimeLeft(run->getNextIO()->getTimeLeft()-1);
-			if(run->getNextIO()->getTimeLeft()==0){
+			
+
+			
+			if(run->getNextIO()&&run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft()){
 			busy = 0 ;
 			QueueTimeLeft-=run->getTimeLeft();
 			sch->ToBLK(run);
 			run = 0 ; 
 			}
 			if(run){
+			busyTime++;
+            run->setTimeLeft(run->getTimeLeft()-1);
 			if(run->getTimeLeft()==0){
 			 busy = false;
 			 QueueTimeLeft-=run->getTimeLeft();
 			 sch->ToTRM(run);
 			 run = 0;
-			}}
+			}}else
+				idleTime++;
 		}
 		else{
 			setRun(sch->gettimestep());
