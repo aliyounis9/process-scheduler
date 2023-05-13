@@ -114,7 +114,8 @@ public:
 		if(busy){
 			
 			if(run->getNextIO()){
-			if(run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft()){
+				cout << "HENA "<< run->getNextIO()->getArrival() << " " << run->getCPUtime() << " " << run->getTimeLeft() << "\n";
+			if(run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft() + 1){
 			busy = 0 ;
 			QueueTimeLeft-=run->getTimeLeft();
 			sch->ToBLK(run);
@@ -128,7 +129,8 @@ public:
 			 QueueTimeLeft-=run->getTimeLeft();
 			 sch->killProcess(run->getID());
 			 run = 0;
-			}}else
+			}
+			}else
 				idleTime++;
 		}
 		else{

@@ -63,6 +63,9 @@ void Scheduler::simulator() {
 			processorsArray[i]->SchedAlgo(this);
 		}
 
+		// move processes that finish IO from BLK to RDY
+		BLKToRDY();
+
 		// for each process in the run state, it will be either sent to the BLK, RDY, or TRM lists of the scheduler or remain as it (depending on probability)
 		//for (int i = 0; i < processorsCount; i++){
 		//	Process* currentRunningProcess = nullptr;
