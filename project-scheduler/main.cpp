@@ -9,7 +9,7 @@ int main() {
 	srand(time(0));
 
 	cout << "Program ran successfuly";
-	Scheduler S("input-50.txt", "output.txt");
+	Scheduler S("input-10.txt", "output.txt");
 	S.simulator();
 	return 0;
 }
