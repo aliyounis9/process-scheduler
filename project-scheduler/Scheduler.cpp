@@ -48,11 +48,11 @@ void  Scheduler::loadInputFile() {
 	}
 }
 void Scheduler::simulator() {
+	ui.continueWithDelay();
 	loadInputFile();
 	ui.setTimeStep(timeSteps);
 
 	while (trmList.getCount() != processessCount ) {
-
 		timeSteps++;
 		ui.setTimeStep(timeSteps);
 
@@ -96,9 +96,10 @@ void Scheduler::simulator() {
 			}
 		}
 
-		// calls UI class functions to print details on the output screen
-		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList, currentIo);
-		ui.continueprinting();
+		// calls UI class functions to print details on the output screen depending on the mode of operation
+		if(modeOfOperation < 3) ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList, currentIo);
+		if (modeOfOperation == 1) ui.continueprinting();
+		else if (modeOfOperation == 2) ui.continueWithDelay();
 	}
 	output();
 }
@@ -175,16 +176,10 @@ void Scheduler::killProcess(int id){
 		if(found && !toKill->getIsKilled()){
 			Process *firstChild = toKill->getFirstChild();
 			Process *secondChild = toKill->getSecondChild();
-			cout<<"will kill "<<id<<" "; 
-			if(firstChild) cout<<"child "<<firstChild->getID()<<" ";
-			if(secondChild) cout<<"child "<<secondChild->getID()<<" ";
-			cout<<"\n";
-
 			if(firstChild) killProcess(firstChild->getID()); 
 			if(secondChild) killProcess(secondChild->getID());
 			ToTRM(toKill);
 			killedCount++;
-			cout<<"\n";
 			toKill = nullptr;
 		}
 	}

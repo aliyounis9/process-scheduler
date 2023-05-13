@@ -125,7 +125,6 @@ public:
 			}
 			
 			if(run && run->getNextIO()){
-				cout << "HENA "<< run->getNextIO()->getArrival() << " " << run->getCPUtime() << " " << run->getTimeLeft() << "\n";
 				if (run->getNextIO()->getArrival() == run->getCPUtime() - run->getTimeLeft()) {
 					busy = 0;
 					QueueTimeLeft -= run->getTimeLeft();

@@ -27,7 +27,7 @@ private:
 	int totalWT; 
 	int totalTRT;
 	int totalRT;
-	
+	int modeOfOperation;
 	int workStealCount ;
 	int forkCount;
 	int killedCount;
@@ -35,7 +35,7 @@ private:
 	int RTFCount; 
 	int MaxwCount;
 public:
-	Scheduler(const char* fileName,const char * fileoutput): inputFile(fileName),outputFile(fileoutput){
+	Scheduler(const char* fileName,const char * fileoutput, int mode): inputFile(fileName),outputFile(fileoutput), modeOfOperation(mode){
 		timeSteps = processorsCount = processessCount = 0;
 		RTFCount =MaxwCount = 0; 
 		totalWT =0;
