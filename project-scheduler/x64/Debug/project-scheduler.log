@@ -1,6 +1,0 @@
-﻿  Scheduler.cpp
-Scheduler.cpp(268): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
-Scheduler.cpp(272): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
-Scheduler.cpp(276): warning C4244: 'return' : conversion from 'double' to 'int', possible loss of data
-d:\college\cairo uni\computer\first year\second term\data structures and algorithms\process scheduler project\lst\process-scheduler\project-scheduler\rr.h(83): warning C4715: 'RR::Run' : not all control paths return a value
-  project-scheduler.vcxproj -> D:\College\Cairo Uni\Computer\First Year\Second Term\Data Structures and Algorithms\Process Scheduler Project\lst\process-scheduler\x64\Debug\project-scheduler.exe

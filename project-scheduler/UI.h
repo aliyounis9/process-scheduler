@@ -24,7 +24,7 @@ public:
 		cin.ignore(1000000000, '\n'); 
 		system("CLS");
 	}
-	void Print(Processor ** pro ,int count ,int NF ,int NS ,int NR , LinkedQueue<Process *>* BLK ,LinkedQueue<Process *>*TRM) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
+	void Print(Processor ** pro ,int count ,int NF ,int NS ,int NR , LinkedQueue<Process *>* BLK ,LinkedQueue<Process *>*TRM,Process * ptr) const  // it should take apointer to Processors to print rdy lists and any way to print BLK and TRM and RUN 
 	{    
 		cout<<"Current Timestep:"<<TimeStep<<endl  ;
 		cout<<"----------- RDY processes ------------"<<endl ; 
@@ -50,12 +50,22 @@ public:
 		}
 
 		cout<<"----------- BLK processes ------------"<<endl ;
-		cout<<BLK->getCount()<<" BLK:";
+		int z = BLK->getCount();
+		if(ptr)
+			z++;
+		bool a = 1 ;
+		cout<<z<<" BLK:";
+		if(ptr)
+			cout<<ptr->getID();
 		if(!BLK->isEmpty())
 		{
 			LinkedQueue<Process * >* TempQ = new LinkedQueue<Process *> ; 
 			while(!BLK->isEmpty()){
 			Process  *id  ;
+			if(a&&ptr){
+			cout<<",";
+			a = 0;
+			}
 			BLK->dequeue(id);
 			TempQ->enqueue(id);
 			cout<<id->getID();

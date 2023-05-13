@@ -106,7 +106,7 @@ void Scheduler::simulator() {
 		ui.setTimeStep(timeSteps);
 		//if(timeSteps %5 == 0) ui.Print(processorsArray, processessCount, NF, NS, NR, &blkList, &trmList);
 		
-		for(int i = 0; i < NF; i++){
+		/*for(int i = 0; i < NF; i++){
 			processorsArray[i]->checkFork(forkProbability, this);
 		}
 
@@ -130,9 +130,9 @@ void Scheduler::simulator() {
 
 		if(timeSteps%STL == 0){
 			doWorkStealing();
-		}
+		}*/
 
-		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList);
+		ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList, currentIo);
 		ui.continueprinting();
 
 
@@ -243,8 +243,6 @@ void Scheduler :: ToTRM(Process * ptr ){
 void Scheduler :: BLKToRDY(){
 	if(!currentIo){
 		blkList.dequeue(currentIo);
-		if(currentIo&&currentIo->getNextIO())
-		currentIo->getNextIO()->setArrival(timeSteps);
 	}
 	if(currentIo){
 	currentIo->getNextIO()->setTimeLeft(currentIo->getNextIO()->getTimeLeft()-1);

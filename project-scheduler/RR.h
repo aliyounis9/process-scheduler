@@ -117,15 +117,7 @@ public:
 	/////////////////////strart coding for phase 2 /////////////////////////////////////////////
 	 virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
-			if(run->getNextIO()){
-			if(run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft()){
-			busy = 0 ;
-			QueueTimeLeft-=run->getTimeLeft();
-			sch->ToBLK(run);
-			run = 0 ; 
-			}}
 			if(run){
-			busyTime++;
 			run->setTimeLeft(run->getTimeLeft()-1);
 			Time--;
 			if(run->getTimeLeft()==0){
@@ -140,6 +132,18 @@ public:
 			 AddToQueue(run);
 			 run = 0;
 			}}
+			if(run&&run->getNextIO()){
+			if(run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft()){
+			busy = 0 ;
+			QueueTimeLeft-=run->getTimeLeft();
+			sch->ToBLK(run);
+			run = 0 ; 
+			}}
+			if(run)
+				busyTime++;
+			else
+				idleTime++;
+			
 		}
 		else{
 			if(setRun(sch->gettimestep())){

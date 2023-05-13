@@ -114,7 +114,7 @@ public:
 		if(busy){
 
 			if (run) {
-				busyTime++;
+				
 				run->setTimeLeft(run->getTimeLeft() - 1);
 				if (run->getTimeLeft() == 0) {
 					busy = false;
@@ -123,18 +123,20 @@ public:
 					run = 0;
 				}
 			}
-			else
-				idleTime++;
 			
 			if(run && run->getNextIO()){
 				cout << "HENA "<< run->getNextIO()->getArrival() << " " << run->getCPUtime() << " " << run->getTimeLeft() << "\n";
-				if (run->getNextIO()->getArrival() == run->getCPUtime() - run->getTimeLeft() + 1) {
+				if (run->getNextIO()->getArrival() == run->getCPUtime() - run->getTimeLeft()) {
 					busy = 0;
 					QueueTimeLeft -= run->getTimeLeft();
 					sch->ToBLK(run);
 					run = 0;
 				}
 			}
+			if(run)
+				busyTime++;
+			else
+				idleTime++;
 
 		}
 		else{
