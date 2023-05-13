@@ -112,37 +112,42 @@ public:
 	///////////////start coding for phase 2 //////////////////////////////
 	virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
-			
-			if(run->getNextIO()){
-				cout << "HENA "<< run->getNextIO()->getArrival() << " " << run->getCPUtime() << " " << run->getTimeLeft() << "\n";
-			if(run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft() + 1){
-			busy = 0 ;
-			QueueTimeLeft-=run->getTimeLeft();
-			sch->ToBLK(run);
-			run = 0 ; 
-			}}
-			if (run){
-			busyTime++;
-			run->setTimeLeft(run->getTimeLeft()-1);
-			if( run->getTimeLeft()==0){
-			 busy = false;
-			 QueueTimeLeft-=run->getTimeLeft();
-			 sch->killProcess(run->getID());
-			 run = 0;
+
+			if (run) {
+				busyTime++;
+				run->setTimeLeft(run->getTimeLeft() - 1);
+				if (run->getTimeLeft() == 0) {
+					busy = false;
+					QueueTimeLeft -= run->getTimeLeft();
+					sch->killProcess(run->getID());
+					run = 0;
+				}
 			}
-			}else
+			else
 				idleTime++;
+			
+			if(run && run->getNextIO()){
+				cout << "HENA "<< run->getNextIO()->getArrival() << " " << run->getCPUtime() << " " << run->getTimeLeft() << "\n";
+				if (run->getNextIO()->getArrival() == run->getCPUtime() - run->getTimeLeft() + 1) {
+					busy = 0;
+					QueueTimeLeft -= run->getTimeLeft();
+					sch->ToBLK(run);
+					run = 0;
+				}
+			}
+
 		}
 		else{
 			if(setRun(sch->gettimestep())){
-			run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
-			while(run&&run->getWaitingTime()>sch->getMaxw())
-			{
-				sch->doMigrationFCFS(run);
-                setRun(sch->gettimestep());
-				if(run)
 				run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
-			}}
+				while(run&&run->getWaitingTime()>sch->getMaxw())
+				{
+					sch->doMigrationFCFS(run);
+					setRun(sch->gettimestep());
+					if(run)
+					run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
+				}
+			}
 		    if(run)
 				busyTime++;
 			else

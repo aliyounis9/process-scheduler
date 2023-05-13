@@ -251,7 +251,7 @@ void Scheduler :: BLKToRDY(){
 	if(currentIo->getNextIO()->getTimeLeft()==0){
 		currentIo->getNextIO()->setDone(1);
 		int Processorindex = 0 ; 
-			for (int i = 0; i < processessCount; i++)
+			for (int i = 0; i < processorsCount; i++)
 			{
 				if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
 					Processorindex = i ;
