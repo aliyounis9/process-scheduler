@@ -155,7 +155,6 @@ void Scheduler::doWorkStealing(){
 		if(t < SQF) SQF = t, Sindex = i;
 	}
 	if(~Lindex && ~Sindex && LQF+0ll-SQF > 40ll*LQF/100){
-		cout<<"HERE WE GO "<<Lindex<<" "<<Sindex;
 		Process * Temp = nullptr ; 
 		processorsArray[Lindex]->getReadyQ()->dequeue(Temp);
 		if(Temp) workStealCount++;
