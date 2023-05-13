@@ -156,7 +156,6 @@ void Scheduler::doWorkStealing(){
 		if(t < SQF) SQF = t, Sindex = i;
 	}
 	if(~Lindex && ~Sindex && LQF+0ll-SQF > 40ll*LQF/100){
-		cout<<"HERE WE GO "<<Lindex<<" "<<Sindex;
 		Process * Temp = nullptr ; 
 		processorsArray[Lindex]->getReadyQ()->dequeue(Temp);
 		if(Temp) workStealCount++;
@@ -172,7 +171,10 @@ void Scheduler::killProcess(int id){
 	for(int i= 0; i < NF && !found; i++){
 		if(processorsArray[i]->exist(id, toKill) || (processorsArray[i]->getrun() && processorsArray[i]->getrun()->getID() == id)) {
 			found = true;
-			if(!toKill) toKill = processorsArray[i]->getrun();
+			if (!toKill) {
+				toKill = processorsArray[i]->getrun();
+				processorsArray[i]->clearRun();
+			}
 		}
 		if(found && !toKill->getIsKilled()){
 			Process *firstChild = toKill->getFirstChild();
@@ -192,7 +194,6 @@ void Scheduler::killProcess(int id){
 void Scheduler :: ToTRM(Process * ptr ){
 	if(ptr){
 		ptr->setTerminateTime(timeSteps);
-
 		ptr->setTurnAroundTime(ptr->getTerminationTime()-ptr->getArrivalTime());
 		addToTotalTRT(ptr->getTurnAroundTime());
 		if(ptr->getWaitingTime()==0 &&ptr->getTurnAroundTime()-ptr->getCPUtime() > 0 )
