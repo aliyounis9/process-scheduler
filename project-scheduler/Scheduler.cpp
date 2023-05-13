@@ -11,9 +11,6 @@ void  Scheduler::loadInputFile() {
 
 		inputFile >> RR_timeSlice >> RTF >> maxW >> STL >> forkProbability >> processessCount;
 
-
-		STL = 2;
-
 		// create processors of each type: they are categorized according to their indices
 		for (int i = 0; i < processorsCount; i++) {
 			if (i < NF) processorsArray[i] = new FCFS;
@@ -54,26 +51,16 @@ void Scheduler::simulator() {
 	loadInputFile();
 	ui.setTimeStep(timeSteps);
 
-	int currentProcessor = 0;
 	while (trmList.getCount() != processessCount ) {
 		timeSteps++;
-		Process* tempProcess;
 
-		// checking the new list for processess arriving at current timestamp and moving them to RDY list of processors
-		while (newList.peek(tempProcess) && tempProcess->getArrivalTime() == timeSteps) {
-			newList.dequeue(tempProcess);
-			Process* cur = tempProcess;
-			processorsArray[currentProcessor]->AddToQueue(cur); // why adding to processors is done through pointers??
-			currentProcessor = (currentProcessor + 1) % processorsCount;
-			tempProcess = nullptr;
-		}
+		// moving processes from the NEW list to the RDY lists of processors 
+		NewToRdy();
 
 
 		// checking the RDY List of each processor and moving a process from the RDY list to the running state iff the processor is idle
 		for (int i = 0; i < processorsCount; i++) {
-			if (!processorsArray[i]->isBusy()) {
-				processorsArray[i]->setRun(timeSteps);
-			}
+			processorsArray[i]->SchedAlgo(this);
 		}
 
 		// for each process in the run state, it will be either sent to the BLK, RDY, or TRM lists of the scheduler or remain as it (depending on probability)
@@ -120,6 +107,16 @@ void Scheduler::simulator() {
 			processorsArray[i]->checkFork(forkProbability, this);
 		}
 
+		for (int i = 0; i < NF; i++) {
+			if (processorsArray[i]->getrun()) {
+				Process* cur = processorsArray[i]->getrun();
+				cout << cur->getID() << " ";
+				if (cur->getFirstChild()) cout << cur->getFirstChild()->getID() << " ";
+				if (cur->getSecondChild()) cout << cur->getSecondChild()->getID() << " ";
+				cout << "\n";
+			}
+		}
+
 		pair<int, int> toKillProcess;
 		if(sigKillTimes.peek(toKillProcess)){
 			if(toKillProcess.first == timeSteps){
@@ -139,13 +136,14 @@ void Scheduler::simulator() {
 	}
 	cout << timeSteps << endl;
 }
-//this func should handle moving processes from new list to the shortest ready queue of the  processoers BY BAHR 
+
+//this func should handle moving processes from new list to the shortest ready queue of the  processors
 void Scheduler::NewToRdy(){
-	Process * tempProcess = 0;
+	Process * tempProcess = nullptr;
 	while (newList.peek(tempProcess) && tempProcess->getArrivalTime() == timeSteps) {
 			newList.dequeue(tempProcess);
 			int Processorindex = 0 ; 
-			for (int i = 0; i < processessCount; i++)
+			for (int i = 0; i < processorsCount; i++)
 			{
 				if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
 					Processorindex = i ;
