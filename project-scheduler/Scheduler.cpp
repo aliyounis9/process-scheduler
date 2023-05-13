@@ -275,13 +275,7 @@ int Scheduler:: getAvgTRT(){
      return avgTRT ;
 }
 
-void Scheduler:: setAvgWT(){
-     int s = 0 ; 
-	 for (int i = 0; i < processessCount; i++)
-	 {
 
-	 }
-}
 void Scheduler:: output(){
 	outputFile <<"TT  PID  AT  CT  IO_D  WT  RT  TRT"<<endl;
 	while(!trmList.isEmpty()){

@@ -62,7 +62,6 @@ public:
 	}
 
 	void output();
-	void setAvgWT();
 	void setAvgRT();
 	void setAvgTRT();
     int getAvgWT();
