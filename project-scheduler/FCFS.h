@@ -19,7 +19,8 @@ public:
 		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
 			busy = true;
-			run->setResponseTime(TS);                                    
+			if(run->getResponseTime()==0)
+				run->setResponseTime(TS); 
 			run->setWaitingTime(TS-run->getArrivalTime());
 			return true;
 		}else

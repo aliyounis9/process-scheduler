@@ -48,7 +48,7 @@ void  Scheduler::loadInputFile() {
 	}
 }
 void Scheduler::simulator() {
-	ui.continueWithDelay();
+	ui.continueprinting();
 	loadInputFile();
 	ui.setTimeStep(timeSteps);
 
@@ -95,10 +95,11 @@ void Scheduler::simulator() {
 				killProcess(toKillProcess.second);
 			}
 		}
+ 
 
 		// calls UI class functions to print details on the output screen depending on the mode of operation
-		if(modeOfOperation < 3) ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList, currentIo);
-		if (modeOfOperation == 1) ui.continueprinting();
+		if(modeOfOperation < 3)ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList, currentIo);
+		if (modeOfOperation == 1)  ui.continueprinting();
 		else if (modeOfOperation == 2) ui.continueWithDelay();
 	}
 	output();
@@ -178,6 +179,9 @@ void Scheduler::killProcess(int id){
 			Process *secondChild = toKill->getSecondChild();
 			if(firstChild) killProcess(firstChild->getID()); 
 			if(secondChild) killProcess(secondChild->getID());
+			int predictedWT = timeSteps - toKill->getArrivalTime()-(toKill->getCPUtime()-toKill->getTimeLeft());
+			toKill->setWaitingTime(predictedWT);
+
 			ToTRM(toKill);
 			killedCount++;
 			toKill = nullptr;
@@ -191,6 +195,7 @@ void Scheduler :: ToTRM(Process * ptr ){
 
 		ptr->setTurnAroundTime(ptr->getTerminationTime()-ptr->getArrivalTime());
 		addToTotalTRT(ptr->getTurnAroundTime());
+		if(ptr->getWaitingTime()==0 &&ptr->getTurnAroundTime()-ptr->getCPUtime() > 0 )
 		ptr->setWaitingTime(ptr->getTurnAroundTime()-ptr->getCPUtime());
 		addToTotalWT(ptr->getWaitingTime());
 		ptr->setIsKilled(true);
@@ -244,25 +249,25 @@ void Scheduler:: output(){
 	}
 	outputFile<<"Processes: "<<processessCount<<endl;
 	outputFile<<"Avg WT = "<<double(totalWT)/processessCount<<",	 Avg RT = "<<double(totalRT)/processessCount<<",		Avg TRT = "<<double(totalTRT)/processessCount<<endl;
-	outputFile<<"Migration %:	RTF = "<<RTFCount/processessCount<<"%,	MaxW = "<<MaxwCount/processessCount<<"%"<<endl;
-	outputFile<<"Work Steal%: "<<workStealCount/processessCount<<"%"<<endl;
-	outputFile<<"Forked Process: "<<forkCount/processessCount<<"%"<<endl;
-	outputFile<<"Killed Process: "<<killedCount/processessCount<<"%"<<endl<<endl;
+	outputFile<<"Migration %:	RTF = "<<(1.0*RTFCount*100)/(1.0*processessCount)<<"%,	MaxW = "<<(1.0*100*MaxwCount)/(1.0*processessCount)<<"%"<<endl;
+	outputFile<<"Work Steal%: "<<(1.0*100*workStealCount)/(processessCount*1.0)<<"%"<<endl;
+	outputFile<<"Forked Process: "<<(100.0*forkCount)/(1.0*processessCount)<<"%"<<endl;
+	outputFile<<"Killed Process: "<<(100.0*killedCount)/processessCount<<"%"<<endl<<endl;
 	outputFile<<"Processors: "<<processorsCount<<" ["<<NF<<" FCFS, "<<NS<<" SJF, "<<NR<<" RR]"<<endl;
 	outputFile<<"Processors Load"<<endl;
 	for (int i = 0; i < processorsCount; i++)
 	{
-		outputFile<<"P"<<i+1<<"="<<processorsArray[i]->getBusyTime()/totalTRT<<"%,	" ;
+		outputFile<<"P"<<i+1<<"="<<(100.0*processorsArray[i]->getBusyTime())/totalTRT<<"%,	" ;
 	}
 	outputFile<<endl<<endl;
 	outputFile<<"Processors Utiliz"<<endl;
     for (int i = 0; i < processorsCount; i++)
 	{
-		outputFile<<"P"<<i+1<<"="<<processorsArray[i]->getBusyTime()/(processorsArray[i]->getBusyTime()+processorsArray[i]->getIdelTime())<<"%,	" ;
+		outputFile<<"P"<<i+1<<"="<<(100.0*processorsArray[i]->getBusyTime())/(processorsArray[i]->getBusyTime()+processorsArray[i]->getIdelTime())<<"%,	" ;
 	}
 	outputFile<<endl;
 	calcTotalUtiliz();
-	outputFile<<"Avg Utilization = "<<double(TotalUtiliz)/processorsCount<<"%"<<endl;
+	outputFile<<"Avg Utilization = "<<(100.0*TotalUtiliz)/processorsCount<<"%"<<endl;
 
 
 }

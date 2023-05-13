@@ -31,7 +31,7 @@ private:
 	int workStealCount ;
 	int forkCount;
 	int killedCount;
-	int TotalUtiliz;
+	double TotalUtiliz;
 	int RTFCount; 
 	int MaxwCount;
 public:
@@ -82,7 +82,7 @@ public:
 	void calcTotalUtiliz(){
 		for (int i = 0; i < processorsCount; i++)
 		{
-			TotalUtiliz+=processorsArray[i]->getBusyTime()/(processorsArray[i]->getBusyTime()+processorsArray[i]->getIdelTime());
+			TotalUtiliz+=(1.0*processorsArray[i]->getBusyTime())/(processorsArray[i]->getBusyTime()+processorsArray[i]->getIdelTime());
 		}
 	}
 	void NewToRdy();

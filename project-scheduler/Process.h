@@ -32,13 +32,13 @@ Process(int at = 0, int id = 0, int ct = 0, int IOn = 0) {
 		TimeDone = 0;
 		isKilled = 0;
 		totalIO_D=0 ; 
+		RT=0;
 		nextIO = nullptr;
 		children[0] = nullptr;
 		children[1] = nullptr;
 		parent = nullptr; 
 	}
-
-
+ 
 void setChild(Process *child){
 	if(children[0] && children[1]) return;
 	if(children[0]) children[1] = child;
