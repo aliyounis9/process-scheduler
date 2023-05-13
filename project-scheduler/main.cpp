@@ -15,7 +15,7 @@ int main() {
 	cout << "Program will run in " << (mode == 1 ? "Interactive" : mode == 2 ? "Step-By-Step" : "Silent") << " mode" << "\n";
 	Sleep(1000);
 
-	Scheduler S("input-200.txt", "output.txt", mode);
+	Scheduler S("input-10.txt", "output.txt", mode);
 	S.simulator();
 	return 0;
 }

@@ -48,7 +48,7 @@ void  Scheduler::loadInputFile() {
 	}
 }
 void Scheduler::simulator() {
-	ui.continueWithDelay();
+	ui.continueprinting();
 	loadInputFile();
 	ui.setTimeStep(timeSteps);
 
@@ -170,7 +170,10 @@ void Scheduler::killProcess(int id){
 	for(int i= 0; i < NF && !found; i++){
 		if(processorsArray[i]->exist(id, toKill) || (processorsArray[i]->getrun() && processorsArray[i]->getrun()->getID() == id)) {
 			found = true;
-			if(!toKill) toKill = processorsArray[i]->getrun();
+			if (!toKill) {
+				toKill = processorsArray[i]->getrun();
+				processorsArray[i]->clearRun();
+			}
 		}
 		if(found && !toKill->getIsKilled()){
 			Process *firstChild = toKill->getFirstChild();
@@ -187,7 +190,6 @@ void Scheduler::killProcess(int id){
 void Scheduler :: ToTRM(Process * ptr ){
 	if(ptr){
 		ptr->setTerminateTime(timeSteps);
-
 		ptr->setTurnAroundTime(ptr->getTerminationTime()-ptr->getArrivalTime());
 		addToTotalTRT(ptr->getTurnAroundTime());
 		ptr->setWaitingTime(ptr->getTurnAroundTime()-ptr->getCPUtime());

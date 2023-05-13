@@ -25,6 +25,11 @@ public:
 	int getBusyTime(){return busyTime ;} 
 	int getIdelTime(){return idleTime ;}
 	virtual bool setRun(int TS)=0 ; 
+	void clearRun() {
+		if(run) QueueTimeLeft -= run->getTimeLeft();
+		run = nullptr;
+		busy = false;
+	}
 	virtual int Run(Process * & ptr) = 0 ;
 	virtual bool  isBusy() {
 		return busy;

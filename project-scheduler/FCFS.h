@@ -30,6 +30,7 @@ public:
 		}
 		
 	}
+
 	virtual int Run(Process * & ptr){
 		if( run ){ // if there is a process already executing
 		  int prob = rand()%100 +1;
