@@ -148,7 +148,7 @@ public:
 
 	void checkFork(int forkProbability, Scheduler *Sh){
 		if(!run) return;
-		int prob = rand()%100 + 1;
+		int prob = rand() % 100 + 1;
 		if(prob > forkProbability) return;
 		Sh->doFork(run);
 	}

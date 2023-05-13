@@ -1,8 +1,6 @@
 #pragma once
 #include <fstream>
 #include "Processor.h"
-//#include"FCFS.h"
-
 #include <cstdlib>
 #include <time.h>
 #include"UI.h"
@@ -23,11 +21,11 @@ private:
 	ifstream inputFile;
 	Process * currentIo ;
 	ofstream outputFile;
-	double avgWT ;
-	double avgRT ;
-	double avgTRT ;
-	int totalWT ; 
-	int totalTRT ;
+	double avgWT;
+	double avgRT;
+	double avgTRT;
+	int totalWT; 
+	int totalTRT;
 	int totalRT;
 	
 	int workStealCount ;

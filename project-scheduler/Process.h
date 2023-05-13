@@ -46,7 +46,7 @@ void setChild(Process *child){
 }
 
 void setParent( Process * Par ){
-parent = Par;
+	parent = Par;
 }
 
 Process * getParent () const {
