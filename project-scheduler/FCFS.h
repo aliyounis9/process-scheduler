@@ -126,6 +126,14 @@ public:
 		}
 		else{
 			setRun(sch->gettimestep());
+			run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
+			while(run&&run->getWaitingTime()>sch->getMaxw())
+			{
+				sch->doMigrationFCFS(run);
+                setRun(sch->gettimestep());
+				if(run)
+				run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
+			}
 		    if(run)
 				busyTime++;
 			else

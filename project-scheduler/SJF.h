@@ -92,6 +92,7 @@ public:
 
 	 virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
+			busyTime++;
             run->setTimeLeft(run->getTimeLeft()-1);
 			run->getNextIO()->setTimeLeft(run->getNextIO()->getTimeLeft()-1);
 			if(run->getNextIO()->getTimeLeft()==0){
@@ -110,6 +111,10 @@ public:
 		}
 		else{
 			setRun(sch->gettimestep());
+			if(busy)
+				busyTime++;
+			else
+				idleTime++;
 		}
 	}
 };

@@ -29,20 +29,21 @@ private:
 	int totalWT ; 
 	int totalTRT ;
 	int totalRT;
-	int RTFCount;
-	int MaxWCount;
+	
 	int workStealCount ;
 	int forkCount;
 	int killedCount;
 	int TotalUtiliz;
+	int RTFCount; 
+	int MaxwCount;
 public:
 	Scheduler(const char* fileName,const char * fileoutput): inputFile(fileName),outputFile(fileoutput){
 		timeSteps = processorsCount = processessCount = 0;
+		RTFCount =MaxwCount = 0; 
 		totalWT =0;
 		totalTRT=0;
 		totalRT=0;
 		maxID = 0;
-		RTFCount=MaxWCount=0;
 		workStealCount=0;
 		forkCount=0;
 		killedCount=0;
@@ -94,4 +95,8 @@ public:
 	void doFork(Process*& running); 
 	void killProcess(int id);
 	void doWorkStealing();
+	void doMigrationRR (Process * ptr) ;
+	void doMigrationFCFS (Process * ptr) ;
+	int getRTF(){return RTF ; } 
+	int getMaxw(){return maxW ;}
 };                                                                    

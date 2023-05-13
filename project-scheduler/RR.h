@@ -113,6 +113,7 @@ public:
 	/////////////////////strart coding for phase 2 /////////////////////////////////////////////
 	 virtual void SchedAlgo(Scheduler * sch){
 		if(busy){
+			busyTime++;
 			run->setTimeLeft(run->getTimeLeft()-1);
 			run->getNextIO()->setTimeLeft(run->getNextIO()->getTimeLeft()-1);
 			Time--;
@@ -138,6 +139,15 @@ public:
 		}
 		else{
 			setRun(sch->gettimestep());
+			while(run&&run->getTimeLeft()<sch->getRTF())
+			{
+				sch->doMigrationRR(run);
+                setRun(sch->gettimestep());
+			}
+			if(busy)
+				busyTime++;
+			else
+				idleTime++;
 		}
 	}
 };

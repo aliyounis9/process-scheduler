@@ -293,7 +293,7 @@ void Scheduler:: output(){
 	}
 	outputFile<<"Processes: "<<processessCount<<endl;
 	outputFile<<"Avg WT = "<<double(totalWT)/processessCount<<",	 Avg RT = "<<double(totalRT)/processessCount<<",		Avg TRT = "<<double(totalTRT)/processessCount<<endl;
-	outputFile<<"Migration %:	RTF = "<<RTFCount/processessCount<<"%,	MaxW = "<<MaxWCount/processessCount<<"%"<<endl;
+	outputFile<<"Migration %:	RTF = "<<RTFCount/processessCount<<"%,	MaxW = "<<MaxwCount/processessCount<<"%"<<endl;
 	outputFile<<"Work Steal%: "<<workStealCount/processessCount<<"%"<<endl;
 	outputFile<<"Forked Process: "<<forkCount/processessCount<<"%"<<endl;
 	outputFile<<"Killed Process: "<<killedCount/processessCount<<"%"<<endl<<endl;
@@ -316,3 +316,26 @@ void Scheduler:: output(){
 
 }
 
+
+
+void Scheduler::doMigrationRR(Process * ptr){
+	RTFCount++;
+	int ind = NF ; 
+	for (int i = NF; i < NS; i++)
+	{
+		if(processorsArray[i]->GetTimeLeft()<processorsArray[ind]->GetTimeLeft())
+			ind = i ; 
+	}
+	processorsArray[ind]->AddToQueue(ptr);
+}
+
+void Scheduler::doMigrationFCFS(Process * ptr){
+	MaxwCount++;
+	int ind = NF+NS ; 
+	for (int i =ind; i < processorsCount; i++)
+	{
+		if(processorsArray[i]->GetTimeLeft()<processorsArray[ind]->GetTimeLeft())
+			ind = i ; 
+	}
+	processorsArray[ind]->AddToQueue(ptr);
+}
