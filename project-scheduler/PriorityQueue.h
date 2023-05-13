@@ -11,7 +11,7 @@ private:
 public:
 	PriorityQueue()
 	{
-		setCount(0);
+		QueueADT<T>::setCount(0);
 		backPtr = nullptr;
 		frontPtr = nullptr;
 	}
@@ -25,7 +25,7 @@ public:
 		if (isEmpty())
 			return false;
 
-		setCount(getCount()-1);
+		QueueADT<T>::setCount(QueueADT<T>::getCount()-1);
 		Node<T>* nodeToDeletePtr = frontPtr;
 		frntEntry = frontPtr->getItem();
 		frontPtr = frontPtr->getNext();
@@ -60,11 +60,11 @@ public:
 		Node<T>* NodePtr = LQ.frontPtr;
 		if (!NodePtr) //LQ is empty
 		{
-			Count=0;
+			QueueADT<T>::Count=0;
 			frontPtr = backPtr = nullptr;
 			return;
 		}
-		Count=LQ->getCount();
+		QueueADT<T>::Count=LQ->getCount();
 		//insert the first node
 		Node<T>* ptr = new Node<T>(NodePtr->getItem());
 		frontPtr = backPtr = ptr;
@@ -81,7 +81,7 @@ public:
 	}
 	bool enqueue(const T& newEntry)
 	{   
-		setCount(getCount()+1);
+		QueueADT<T>::setCount(QueueADT<T>::getCount()+1);
 		Node<T>* newNodePtr = new Node<T>(newEntry);
 		// Insert the new node
 		if (isEmpty())	//special case if this is the first node to insert
