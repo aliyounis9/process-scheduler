@@ -22,8 +22,13 @@ public:
 			run->setResponseTime(TS);                                    
 			run->setWaitingTime(TS-run->getArrivalTime());
 			return true;
-		}
+		}else
+		{
+		busy = 0 ; 
+		run =0;
 		return false;
+		}
+		
 	}
 	virtual int Run(Process * & ptr){
 		if( run ){ // if there is a process already executing
@@ -125,7 +130,7 @@ public:
 			}}
 		}
 		else{
-			setRun(sch->gettimestep());
+			if(setRun(sch->gettimestep())){
 			run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
 			while(run&&run->getWaitingTime()>sch->getMaxw())
 			{
@@ -133,7 +138,7 @@ public:
                 setRun(sch->gettimestep());
 				if(run)
 				run->setWaitingTime(sch->gettimestep()-run->getArrivalTime()-(run->getCPUtime()-run->getTimeLeft()));
-			}
+			}}
 		    if(run)
 				busyTime++;
 			else

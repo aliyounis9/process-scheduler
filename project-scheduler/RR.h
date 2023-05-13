@@ -30,7 +30,11 @@ public:
 			Time = TimeSlice ; 
 			return 1 ; 
 		}else 
-			return 0 ; 
+		{
+		busy = 0 ; 
+		run =0;
+		return false;
+		} 
 	}
 	int Run(Process * & ptr){
 		if(run&&Time){
@@ -138,12 +142,12 @@ public:
 			}}
 		}
 		else{
-			setRun(sch->gettimestep());
+			if(setRun(sch->gettimestep())){
 			while(run&&run->getTimeLeft()<sch->getRTF())
 			{
 				sch->doMigrationRR(run);
                 setRun(sch->gettimestep());
-			}
+			}}
 			if(busy)
 				busyTime++;
 			else

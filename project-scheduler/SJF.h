@@ -22,7 +22,11 @@ public:
 			return 1;
 		}
 		else
-			return 0;
+		{
+		busy = 0 ; 
+		run =0;
+		return false;
+		}
 	}
 	virtual int  Run(Process*& ptr) {
 		if (run) {
