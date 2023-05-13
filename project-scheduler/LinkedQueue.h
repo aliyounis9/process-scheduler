@@ -8,8 +8,6 @@ using namespace std;
 
 #include "Node.h"
 #include "QueueADT.h"
-#include <vector>
-using namespace std;
 
 
 template <typename T>
@@ -71,11 +69,10 @@ The constructor of the Queue class.
 */
 
 template <typename T>
-LinkedQueue<T>::LinkedQueue()
-{
+LinkedQueue<T>::LinkedQueue(){
 	backPtr=nullptr;
 	frontPtr=nullptr;
-	setCount(0);
+	QueueADT<T>::setCount(0);
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 
@@ -104,7 +101,7 @@ Output: True if the operation is successful; otherwise false.
 template <typename T>
 bool LinkedQueue<T>::enqueue( const T& newEntry)
 {
-	setCount(getCount()+1);
+	QueueADT<T>::setCount(QueueADT<T>::getCount()+1);
 	Node<T>* newNodePtr = new Node<T>(newEntry);
 	// Insert the new node
 	if (isEmpty())	//special case if this is the first node to insert
@@ -132,7 +129,7 @@ bool LinkedQueue<T>:: dequeue(T& frntEntry)
 {   
 	if(isEmpty())
 		return false;
-	setCount(getCount()-1);
+	QueueADT<T>::setCount(QueueADT<T>::getCount()-1);
 	Node<T>* nodeToDeletePtr = frontPtr;
 	frntEntry = frontPtr->getItem();
 	frontPtr = frontPtr->getNext();

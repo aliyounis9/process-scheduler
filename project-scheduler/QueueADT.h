@@ -3,6 +3,7 @@
 //  Copyright (c) 2017 Pearson Education, Hoboken, New Jersey.
 
 /** @file QueueADT.h */
+
 #ifndef QUEUE_ADT_
 #define QUEUE_ADT_
 
