@@ -101,6 +101,9 @@ void Scheduler::simulator() {
 		if(modeOfOperation < 3)ui.Print(processorsArray, processorsCount, NF, NS, NR, &blkList, &trmList, currentIo);
 		if (modeOfOperation == 1)  ui.continueprinting();
 		else if (modeOfOperation == 2) ui.continueWithDelay();
+
+  
+
 	}
 	output();
 }
