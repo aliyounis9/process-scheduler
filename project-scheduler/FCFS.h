@@ -165,4 +165,6 @@ public:
 		if(prob > forkProbability) return;
 		Sh->doFork(run);
 	}
+	virtual ~FCFS() {
+	}
 };

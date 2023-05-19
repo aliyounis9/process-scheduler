@@ -139,7 +139,7 @@ int getIO_n(){ //////////////
 int getTimeLeft(){
 	return timeLeft;
 }
-IO* getNextIO(){ ///////////
+IO* &getNextIO(){ ///////////
 	if(!nextIO){
 	
 		IOs.dequeue(nextIO);
@@ -175,5 +175,8 @@ void Print() {
 	friend ostream& operator << (ostream& out, Process* ptr){
 		out << ptr->ID;
 		return out;
+	}
+
+	~Process(){
 	}
 };

@@ -160,4 +160,7 @@ public:
 				idleTime++;
 		}
 	}
+	 virtual ~RR() {
+
+	 }
 };

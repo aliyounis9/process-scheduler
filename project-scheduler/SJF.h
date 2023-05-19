@@ -90,10 +90,6 @@ public:
 	virtual int exist(int id, Process*& ptr) {
 		return 0;
 	}
-
-	~SJF(){
-	
-	}
 	/////////////////////strart coding for phase 2 /////////////////////////////////////////////
 
 	 virtual void SchedAlgo(Scheduler * sch){
@@ -127,5 +123,8 @@ public:
 				idleTime++;
 		}
 	}
+	 virtual ~SJF() {
+
+	 }
 };
 

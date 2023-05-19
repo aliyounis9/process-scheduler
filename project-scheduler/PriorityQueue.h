@@ -48,7 +48,7 @@ public:
 		return true;
 
 	}
-	~PriorityQueue()
+	virtual ~PriorityQueue()
 	{
 		T temp;
 
