@@ -77,7 +77,6 @@ void Scheduler::simulator() {
 
 		// do work stealing operations
 		if (timeSteps % STL == 0) {
-			cout<<"YES" ;
 			doWorkStealing();
 		}
 
