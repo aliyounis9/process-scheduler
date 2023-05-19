@@ -25,7 +25,7 @@ public :
 	bool top(T* &frntPointer)  const;
 	
 
-	~LinkedQueue();
+	virtual ~LinkedQueue();
 
 	//copy constructor
 	LinkedQueue(const LinkedQueue<T> & LQ);
@@ -167,7 +167,7 @@ Function: destructor
 removes all nodes from the queue by dequeuing them
 */
 template <typename T>
-LinkedQueue<T>::~LinkedQueue()
+ LinkedQueue<T>:: ~LinkedQueue()
 {
 	T temp;
 	
@@ -207,6 +207,8 @@ LinkedQueue<T>::LinkedQueue(const LinkedQueue<T> & LQ)
 		backPtr = ptr;
 		NodePtr = NodePtr->getNext();
 	}	
+
+
 }
 
 #endif

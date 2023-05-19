@@ -105,7 +105,14 @@ void Scheduler::simulator() {
   
 
 	}
+	// generating output file and deleting processes 
 	output();
+
+	 //deleting processors
+	for (int i = 0; i < processorsCount; i++) {
+		delete processorsArray[i];
+	}
+
 }
 
 //this func should handle moving processes from new list to the shortest ready queue of the  processors
@@ -216,13 +223,14 @@ void Scheduler :: BLKToRDY(){
 	if(currentIo->getNextIO()->getTimeLeft()==0){
 		currentIo->getNextIO()->setDone(1);
 		int Processorindex = 0 ; 
-			for (int i = 0; i < processorsCount; i++)
-			{
-				if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
-					Processorindex = i ;
-			}
-			processorsArray[Processorindex]->AddToQueue(currentIo);
-			currentIo->popIO();
+		for (int i = 0; i < processorsCount; i++)
+		{
+			if(processorsArray[i]->GetTimeLeft()<processorsArray[Processorindex]->GetTimeLeft() )
+				Processorindex = i ;
+		}
+		processorsArray[Processorindex]->AddToQueue(currentIo);
+		currentIo->popIO();
+		delete currentIo->getNextIO(); // deleting IOs
 		currentIo = nullptr ;
 	}
 	}
@@ -245,11 +253,11 @@ int Scheduler:: getAvgTRT(){
 void Scheduler:: output(){
 	outputFile <<"TT  PID  AT  CT  IO_D  WT  RT  TRT"<<endl;
 	while(!trmList.isEmpty()){
-	Process * ptr = nullptr ; 
-	trmList.dequeue(ptr);
-	addToTotalRT(ptr->getResponseTime());
-	outputFile<<ptr->getTerminationTime()<<"  "<<ptr->getID()<<"  "<<ptr->getArrivalTime()<<"  "<<ptr->getCPUtime()<<"  "<<ptr->getTotalIO_D()<<"  "<<ptr->getWaitingTime()<<"  "<<ptr->getResponseTime()<<"  "<<ptr->getTurnAroundTime()<<endl;
-	ptr=nullptr;
+		Process * ptr = nullptr ; 
+		trmList.dequeue(ptr);
+		addToTotalRT(ptr->getResponseTime());
+		outputFile<<ptr->getTerminationTime()<<"  "<<ptr->getID()<<"  "<<ptr->getArrivalTime()<<"  "<<ptr->getCPUtime()<<"  "<<ptr->getTotalIO_D()<<"  "<<ptr->getWaitingTime()<<"  "<<ptr->getResponseTime()<<"  "<<ptr->getTurnAroundTime()<<endl;
+		delete ptr; // deleting process
 	}
 	outputFile<<"Processes: "<<processessCount<<endl;
 	outputFile<<"Avg WT = "<<double(totalWT)/processessCount<<",	 Avg RT = "<<double(totalRT)/processessCount<<",		Avg TRT = "<<double(totalTRT)/processessCount<<endl;

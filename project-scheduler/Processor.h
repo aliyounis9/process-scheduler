@@ -21,6 +21,7 @@ public:
 		RDYCount=0;
 		busyTime=0;
 		idleTime=0;
+		ReadyQ = nullptr;
 	}
 	int getBusyTime(){return busyTime ;} 
 	int getIdelTime(){return idleTime ;}
@@ -57,5 +58,9 @@ public:
 		//////////////////////////start coding for phase 2 ///////////////////////////////////////////////////////
 	virtual void SchedAlgo(Scheduler * sch) = 0 ;
 	virtual void checkFork(int forkProbability, Scheduler *Sh){
+	}
+	virtual ~Processor() {
+		delete ReadyQ;
+
 	}
 };
