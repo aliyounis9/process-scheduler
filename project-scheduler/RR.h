@@ -24,6 +24,7 @@ public:
 	virtual bool setRun(int TS){
 		if(!busy&&!ReadyQ->isEmpty()){
 	     	ReadyQ->dequeue(run);
+			QueueTimeLeft-=run->getTimeLeft();
 			busy = true;
 			if(run->getResponseTime()==0)
 			run->setResponseTime(TS);                                    
@@ -123,20 +124,20 @@ public:
 			Time--;
 			if(run->getTimeLeft()==0){
 			 busy = false;
-			 QueueTimeLeft-=run->getTimeLeft();
+			
 			 sch->ToTRM(run);
 			 run = 0;
 			}
 			if(Time==0&&run){
 			 busy = false;
-			 QueueTimeLeft-=run->getTimeLeft();
+			
 			 AddToQueue(run);
 			 run = 0;
 			}}
 			if(run&&run->getNextIO()){
 			if(run->getNextIO()->getArrival()==run->getCPUtime()-run->getTimeLeft()){
 			busy = 0 ;
-			QueueTimeLeft-=run->getTimeLeft();
+		
 			sch->ToBLK(run);
 			run = 0 ; 
 			}}

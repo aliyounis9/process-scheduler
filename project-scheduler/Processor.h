@@ -26,7 +26,7 @@ public:
 	int getIdelTime(){return idleTime ;}
 	virtual bool setRun(int TS)=0 ; 
 	void clearRun() {
-		if(run) QueueTimeLeft -= run->getTimeLeft();
+		
 		run = nullptr;
 		busy = false;
 	}
@@ -40,11 +40,14 @@ public:
 	virtual int  GetTimeLeft(){
 		return QueueTimeLeft;
 	}
+	virtual void  SetQueueTimeLeft(int x){
+		QueueTimeLeft=x;
+	}
 	Process* getRunning(){
 		return run;
 	}
 	void AddToQueue(Process*ToAdd){
-		QueueTimeLeft+=ToAdd->getCPUtime();
+		QueueTimeLeft+=ToAdd->getTimeLeft();
 		ReadyQ->enqueue(ToAdd);
         
 	}

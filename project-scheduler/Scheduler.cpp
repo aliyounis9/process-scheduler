@@ -77,6 +77,7 @@ void Scheduler::simulator() {
 
 		// do work stealing operations
 		if (timeSteps % STL == 0) {
+			cout<<"YES" ;
 			doWorkStealing();
 		}
 
@@ -158,11 +159,15 @@ void Scheduler::doWorkStealing(){
 		if(t > LQF) LQF = t, Lindex = i;
 		if(t < SQF) SQF = t, Sindex = i;
 	}
-	if(~Lindex && ~Sindex && LQF+0ll-SQF > 40ll*LQF/100){
+	
+	while(~Lindex && ~Sindex && LQF+0ll-SQF > 40ll*LQF/100 && !(processorsArray[Lindex]->getReadyQ()->isEmpty()) ){
 		Process * Temp = nullptr ; 
 		processorsArray[Lindex]->getReadyQ()->dequeue(Temp);
-		if(Temp) workStealCount++;
-		if(Temp) processorsArray[Sindex]->AddToQueue(Temp);
+		if(Temp){
+			workStealCount++;
+		    processorsArray[Sindex]->AddToQueue(Temp);
+			processorsArray[Lindex]->SetQueueTimeLeft(processorsArray[Lindex]->GetTimeLeft()-Temp->getTimeLeft());
+		}
 		LQF = processorsArray[Lindex]->GetTimeLeft();
 		SQF = processorsArray[Sindex]->GetTimeLeft();
 	}
