@@ -21,15 +21,15 @@ The project was implemented using different types of data structures such as tre
 
 ## Main Features <a name ="features"></a>
 - Work Stealing
-  * If a processor got overloaded with processes some of the processes will be moved and handled by another processor.
+  * If a processor got overloaded with processes, some of the processes will be moved and handled by another processor.
   * The processes to be stolen are from the processor which has the longest execution time left.
 - Process forking
-  * Each process can fork a process ***(Create a new process)***.
+  * Each process can fork one or two processes ***(Create a new process)***.
   * The new process has as much CPU time left as the main process it got forked from.
 - Requesting I/O
-  * Each Process can request to take an input or display output.
+  * Each process can request to take an input or display output.
 - Killing a process
   * Each process can get killed if it receives a SIGKILL ***(Kill Signal)***. 
-  * If the process to be killed has forked children, they must be killed too.
+  * If the process to be killed has forked children, they will be killed too.
 
 If you have any inquiries, please do not hesitate to reach out.
